@@ -1,0 +1,14 @@
+:root {
+    --primary: #6943ff;
+    --gray: gray;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --gray: gray;
+    }
+}
+
+.card {
+
+}
