@@ -1,9 +1,10 @@
-function addCards() {
-    for (i=0;i<5;i++) {  
+function addCard() {
      var v = document.createElement('div');
      v.classList.add("card");
+     v.classList.add("new-card");
      
      var a = document.createElement('a');
+     a.href = "#";
 
      var cardBg = document.createElement('div');
      cardBg.classList.add("card-bg");
@@ -22,6 +23,4 @@ function addCards() {
      v.appendChild(a)
 
      document.getElementById('container').appendChild(v);
-     console.log("clicked!")
-    }
 }
