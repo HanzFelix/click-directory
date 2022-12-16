@@ -3,9 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
-    <p>Hello</p>
+    <button onclick="addCards()">Add Cards</button>
+    <main class="container" id="container">
+        <div class="card" draggable="true">
+            <a href="#" draggable="false">
+                <div class="card-bg">
+                    <button class="edit-button hidden">edit</button>
+                    <p>Text</p>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="#">
+                <div class="card-bg">
+                    <button class="edit-button hidden">edit</button>
+                    <p>Text</p>
+                </div>
+            </a>
+        </div>
+        <div class="card last">
+            <a href="#">
+                <div class="card-bg">
+                    <button class="edit-button hidden">edit</button>
+                    <p>Text</p>
+                </div>
+            </a>
+        </div>
+    </main>
+    <script src="script.js"></script>
 </body>
 </html>
