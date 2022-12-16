@@ -27,6 +27,7 @@ a {
 }
 .card {
     display: inline-block;
+    animation: append-animate .4s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
 .card-bg {
@@ -69,9 +70,6 @@ a {
     cursor: pointer;
 }
 
-.last {
-    flex-grow: 1;
-}
 /*
 @media(min-width: 341px) {
     .container{
@@ -100,4 +98,16 @@ a {
     .container{
         grid-template-columns: repeat(5, auto);
     }
+}
+
+/* Animations */
+@keyframes append-animate {
+	from {
+		transform: translateY(20%);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0%);
+		opacity: 1;	
+	}
 }
