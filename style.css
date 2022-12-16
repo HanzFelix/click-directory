@@ -46,7 +46,19 @@ a {
     align-items: flex-end;
     border-radius: 12px;
     box-sizing: border-box;
-    border: 0px solid red;
+}
+
+.add-btn {
+    box-sizing: border-box;
+    width: 196px;
+    height: 128px;
+    border-radius: 12px;
+    background-color: red;
+}
+
+.add {
+    
+    grid-row-start: span 9000;
 }
 
 .card:hover .hidden {
@@ -87,9 +99,6 @@ a {
 @media(min-width: 521px) {
     .container{
         grid-template-columns: repeat(2, auto);
-    }
-    .tile{
-        width: 200px;
     }
 }
 @media(min-width: 731px) {
