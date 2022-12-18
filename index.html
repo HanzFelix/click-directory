@@ -6,28 +6,33 @@
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
-<body>
+<body id="bod">
     <button onclick="addCard()">Add Cards</button>
-    <main class="container" id="container">
+    <main class="container" id="grid">
+        <div class="card add" id="add-btn">
+            <a>
+                <div class="card-add">
+                    <h5>Create Directory</h5>
+                    <input type="text" name="" id="">
+                    <input type="url" name="" id="">
+                    <input type="file" name="" id="">
+                    <input type="submit" onclick="addCard()" value="&#10004;">
+                </div>
+            </a>
+        </div>
         <div class="card" draggable="true">
-            <a href="#" draggable="false">
-                <div class="card-bg">
-                    <button class="edit-button hidden">edit</button>
-                    <p>Text</p>
+            <a href="#">
+                <div class="card-url">
+                    <button class="edit-button hidden">&bull;&bull;&bull;</button>
+                    <p>Facebook.com</p>
                 </div>
             </a>
         </div>
         <div class="card">
             <a href="#">
-                <div class="card-bg">
-                    <button class="edit-button hidden">edit</button>
+                <div class="card-url">
+                    <button class="edit-button hidden">&bull;&bull;&bull;</button>
                     <p>Text</p>
-                </div>
-            </a>
-        </div>
-        <div class="card">
-            <a href="#">
-                <div class="add-btn">
                 </div>
             </a>
         </div>
