@@ -10,30 +10,32 @@
     <button onclick="addCard()">Add Cards</button>
     <main class="container" id="grid">
         <div class="card add" id="add-btn">
-            <a>
-                <div class="card-add">
-                    <h5>Create Directory</h5>
-                    <input type="text" name="" id="">
-                    <input type="url" name="" id="">
-                    <input type="file" name="" id="">
-                    <input type="submit" onclick="addCard()" value="&#10004;">
-                </div>
-            </a>
+            <div class="card-add">
+                <h5>Create Directory</h5>
+                <input type="text" name="" id="">
+                <input type="url" name="" id="">
+                <label for="input-file">Browse...</label>
+                <input type="file" name="" id="input-file" hidden>
+                <input type="submit" onclick="addCard()" value="&#10004;" accept="image/*" >
+            </div>
         </div>
         <div class="card" draggable="true">
-            <a href="#">
-                <div class="card-url">
-                    <button class="edit-button hidden">&bull;&bull;&bull;</button>
-                    <p>Facebook.com</p>
-                </div>
+            <button class="edit-button hidden">&bull;&bull;&bull;</button>
+            <a href="https://google.com/" class="card-url">
+                    <div></div>
+                    <p>
+                        Google.com<br>
+                        <span>
+                            https://google.com/
+                        </span>
+                    </p>
             </a>
         </div>
         <div class="card">
-            <a href="#">
-                <div class="card-url">
-                    <button class="edit-button hidden">&bull;&bull;&bull;</button>
-                    <p>Text</p>
-                </div>
+            <button class="edit-button hidden">&bull;&bull;&bull;</button>
+            <a href="#" class="card-url">
+                    <div></div>
+                    <p>Website.com</p>
             </a>
         </div>
     </main>
