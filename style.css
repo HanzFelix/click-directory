@@ -63,14 +63,11 @@ a {
     height: 100%;
 }
 
-.add {
-    /*grid-column-end: span 2;*/
-    /*width: 416px;*/
+/* Create Directory Card */
+.card-add {
     z-index: 200;
     transition: all 200ms ease-in-out;
-}
-
-.card-add {
+    background-image: none;
     box-sizing: border-box;
     background: #f2f2f2;
     display: flex;
@@ -78,47 +75,87 @@ a {
     justify-content: space-between;
     border-radius: 12px;
     height: 100%;
+    padding: 0;
+    background-size: cover;
+    background-position: left;
 }
 
 .card-add > * {
     margin: 0 1em;
 }
 .card-add > *:first-child {
-    margin: 1em 1em 0 1em;
+    margin: 0.8em 1em 0 1em;
+    color: #333333;
+    text-shadow: auto;
+    text-shadow:
+        0.1em 0 hsla(0, 0%, 90%, 0.8),
+        0 0.1em hsla(0, 0%, 90%, 0.8),
+        -0.1em 0 hsla(0, 0%, 90%, 0.8),
+        0 -0.1em hsla(0, 0%, 90%, 0.8);
 }
 .card-add > *:last-child {
-    margin: 0;
-}
-
-.card-add h5 {
-    margin: 1em 1em 0 1em;
-}
-
-.card-add input[type="file"] {
-    font-size: 0.8em;
+    margin: 0 0 -1px 0;
 }
 
 .card-add label {
     cursor: pointer;
+    color: gray;
 }
 
 .card-add input[type="submit"] {
     border: none;
     cursor: pointer;
-    background-color: inherit;
+    background-color: hsla(0, 0%, 95%, 0.5);
     border-radius: 0 0 12px 12px;
+    transition: 200ms ease-in-out;
 }
 
 .card-add input[type="submit"]:hover {
-    background-color: dimgrey;
+    background-color: hsla(180, 50%, 20%, 1);
+    color: white;
 }
 
 .card:hover .hidden {
     opacity: 1;
 }
 
+.row {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-between;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    align-items: center;
+}
+
+.row input, .row label {
+    width: 100%;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    border: none;
+    background-color: hsla(0, 0%, 85%, 0.8);
+    padding: 0.5em 0.5em;
+    height: fit-content;
+    font-size: x-small;
+}
+
+.row input:focus {
+    outline: none;
+}
+
 .new-card {
     animation: append-animate .3s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.row .material-icons {
+    font-size: large !important;
+    margin-left: 0.1em; 
+    color: hsla(0, 0%, 10%, 0.9);
+    text-shadow:
+        0.1em 0 hsla(0, 0%, 90%, 0.8),
+        0 0.1em hsla(0, 0%, 90%, 0.8),
+        -0.1em 0 hsla(0, 0%, 90%, 0.8),
+        0 -0.1em hsla(0, 0%, 90%, 0.8);
 }
 
 /* Clickable links */
@@ -138,14 +175,18 @@ a {
 }
 .card-url > p > span {
     position: absolute;
+    width: inherit;
     font-weight: normal;
     opacity: 0;
     animation: fade-in 250ms ease-out;
     display: none;
+    padding-right: 0.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 p:hover {
     padding-bottom: 1.8em;
-    background-color: hsla(128, 0%, 10%, 0.8);
+    background-color: hsla(128, 0%, 10%, 0.7);
 }
 p:hover > span {
     opacity: 1;
@@ -156,17 +197,18 @@ p:hover > span {
 .edit-button {
     border-radius: 4px;
     margin: 0.8em;
-    margin-left: 12em;
+    margin-left: 10em;
     opacity: 0;
     border: none;
     background: #F2F2F2;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     transition: ease 200ms;
     cursor: pointer;
+    aspect-ratio: 1 / 1;
     position: absolute;
+    font-size: medium !important;
+    padding: 4px;
 }
-
-
 
 /* Media Queries
 @media(min-width: 341px) {
