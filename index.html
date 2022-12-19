@@ -4,29 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <title>Document</title>
 </head>
-<body id="bod">
+<body>
     <button onclick="addCard()">Add Cards</button>
     <main class="container" id="grid">
-        <div class="card add" id="add-btn">
-            <div class="card-add">
+        <div class="card add" id="add-card">
+            <form class="card-add" id="add-card-bg">
                 <h5>Create Directory</h5>
-                <input type="text" name="" id="">
-                <input type="url" name="" id="">
-                <label for="input-file">Browse...</label>
-                <input type="file" name="" id="input-file" hidden>
-                <input type="submit" onclick="addCard()" value="&#10004;" accept="image/*" >
-            </div>
+                <div class="row">
+                    <span class="material-icons">
+                        title
+                    </span>
+                    <input type="text" name="" id="input-title" placeholder="Title">
+                </div>
+                
+                <div class="row">
+                    <span class="material-icons">
+                        link
+                    </span>
+                    <input type="url" name="" id="input-url" placeholder="URL">
+                </div>
+                <div class="row">
+                    <span class="material-icons">
+                        wallpaper
+                    </span>
+                    <label for="input-image" id="label-image">Browse...</label>
+                    <input type="file" name="input-image" id="input-image" hidden onchange="updateImageDisplay()" accept="image/*">
+                </div>
+                
+                <input type="submit" onclick="addCard()" value="&#10004;">
+            </form>
         </div>
+        <!--Sample card-->
         <div class="card" draggable="true">
-            <button class="edit-button hidden">&bull;&bull;&bull;</button>
-            <a href="https://google.com/" class="card-url">
+            <button class="edit-button hidden material-icons">edit</button>
+            <a href="https://google.com/" class="card-url" draggable="false" dr>
                     <div></div>
                     <p>
                         Google.com<br>
                         <span>
-                            https://google.com/
+                            https://google.com/aaaaaaaaaaaaaaaaaaaaaaa
                         </span>
                     </p>
             </a>
@@ -35,7 +54,11 @@
             <button class="edit-button hidden">&bull;&bull;&bull;</button>
             <a href="#" class="card-url">
                     <div></div>
-                    <p>Website.com</p>
+                    <p>Website.com Homepage - Click here to navigate thru the entire site<br>
+                        <span>
+                            https://google.com/
+                        </span>
+                    </p>
             </a>
         </div>
     </main>
