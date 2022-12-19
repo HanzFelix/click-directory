@@ -1,40 +1,88 @@
-var add = document.getElementById("add-btn");
-const gridComputedStyle = getComputedStyle(document.getElementById("grid"));
+var add = document.getElementById("add-card");
+//const gridComputedStyle = getComputedStyle(document.getElementById("grid"));
 var cardCount = 2;
 add.style.order = cardCount+1;
 
-function addCard() {
-     var gridRowCount = gridComputedStyle.getPropertyValue("grid-template-rows").split(" ").length;
-     var gridColCount = gridComputedStyle.getPropertyValue("grid-template-columns").split(" ").length;
+var addCardBg = document.getElementById("add-card-bg");
+var titleInput = document.getElementById("input-title");
+var urlInput = document.getElementById("input-url");
+var imageLabel = document.getElementById("label-image");
+var imageInput = document.getElementById("input-image");
+var bgImage = "none";
 
+function addCard() {
+     // Prepare values
+     var titleText = titleInput.value;
+     var urlText = urlInput.value;
+
+     if (!urlText)
+          return
+
+     if (!titleText) {
+          titleText = urlText;
+     }
+     
+
+     // Construct New Card
      var v = document.createElement('div');
+     v.style.backgroundImage = bgImage;
      v.classList.add("card");
      v.classList.add("new-card");
-     
-     var a = document.createElement('a');
-     a.href = "#";
-
-     var cardBg = document.createElement('div');
-     cardBg.classList.add("card-url");
+     v.draggable = "true";
 
      var btnEdit = document.createElement('button');
      btnEdit.classList.add("edit-button");
      btnEdit.classList.add("hidden");
-     btnEdit.textContent = "•••"
+     btnEdit.classList.add("material-icons");
+     btnEdit.textContent = "edit"
+     
+     var a = document.createElement('a');
+     a.classList.add("card-url");
+     a.href = urlInput;
+     
+
+     var emptyDiv = document.createElement('div');
 
      var p = document.createElement('p');
-     p.textContent = "Very long title that exceeds a few lines"
+     p.textContent = titleText;
 
-     cardBg.appendChild(btnEdit)
-     cardBg.appendChild(p)
-     a.appendChild(cardBg)
-     v.appendChild(a)
+     br = document.createElement('br');
+
+     span = document.createElement('span');
+     span.textContent = urlText;
+
+     v.appendChild(btnEdit);
+     v.appendChild(a);
+     a.appendChild(emptyDiv);
+     a.appendChild(p);
+     p.appendChild(br);
+     p.appendChild(span);
+
+     
 
      document.getElementById('grid').appendChild(v);
      cardCount++;
 
-     add.style.order = cardCount+1
-     //add.classList.remove("add");
-     //add.classList.add("add");
-     // temp
+     resetAddCard()
+     add.style.order = cardCount+1;
+}
+
+function resetAddCard() {
+     titleInput.value = "";
+     urlInput.value = "";
+     bgImage = "none";
+     addCardBg.style.backgroundImage = bgImage;
+     console.log(imageLabel.textContent)
+     //imageLabel.textContent = "Browse..."
+}
+
+function updateImageDisplay() {
+     // TODO: accept only one image file
+     const curFiles = imageInput.files;
+     for(const file of curFiles) {
+          bgImage = "url("+URL.createObjectURL(file)+")";
+          addCardBg.style.backgroundImage = bgImage;
+          imageLabel.textContent = file.name
+     }
+
 }
