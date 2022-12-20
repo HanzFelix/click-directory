@@ -13,22 +13,23 @@ var bgImage = "none";
 function addCard() {
      // Prepare values
      var titleText = titleInput.value;
-     var urlText = urlInput.value;
+     var urlText = urlInput.value
 
      if (!urlText)
           return
 
-     if (!titleText) {
+     if (!titleInput.value) {
           titleText = urlText;
      }
      
 
      // Construct New Card
      var v = document.createElement('div');
-     v.style.backgroundImage = bgImage;
      v.classList.add("card");
      v.classList.add("new-card");
      v.draggable = "true";
+     if (bgImage != "none")
+          v.style.backgroundImage = bgImage;
 
      var btnEdit = document.createElement('button');
      btnEdit.classList.add("edit-button");
@@ -63,7 +64,7 @@ function addCard() {
      document.getElementById('grid').appendChild(v);
      cardCount++;
 
-     resetAddCard()
+     //resetAddCard()
      add.style.order = cardCount+1;
 }
 
@@ -73,7 +74,7 @@ function resetAddCard() {
      bgImage = "none";
      addCardBg.style.backgroundImage = bgImage;
      console.log(imageLabel.textContent)
-     //imageLabel.textContent = "Browse..."
+     imageLabel.textContent = "Browse..."
 }
 
 function updateImageDisplay() {
