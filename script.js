@@ -39,7 +39,7 @@ function addCard() {
      
      var a = document.createElement('a');
      a.classList.add("card-url");
-     a.href = urlInput;
+     a.href = urlText;
      
 
      var emptyDiv = document.createElement('div');
@@ -64,7 +64,7 @@ function addCard() {
      document.getElementById('grid').appendChild(v);
      cardCount++;
 
-     //resetAddCard()
+     resetAddCard()
      add.style.order = cardCount+1;
 }
 
