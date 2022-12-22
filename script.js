@@ -14,8 +14,8 @@ function addCard(e) {
      e.preventDefault()
      
      // Prepare values
-     var titleText = titleInput.value;
-     var urlText = urlInput.value
+     let titleText = titleInput.value;
+     let urlText = urlInput.value
 
      if (!urlText)
           return
@@ -26,27 +26,27 @@ function addCard(e) {
      
 
      // Construct New Card
-     var v = document.createElement('div');
+     let v = document.createElement('div');
      v.classList.add("card");
      v.classList.add("new-card");
      v.draggable = "true";
      if (bgImage != "none")
           v.style.backgroundImage = bgImage;
 
-     var btnEdit = document.createElement('button');
+     let btnEdit = document.createElement('button');
      btnEdit.classList.add("edit-button");
      btnEdit.classList.add("hidden");
      btnEdit.classList.add("material-icons");
      btnEdit.textContent = "edit"
      
-     var a = document.createElement('a');
+     let a = document.createElement('a');
      a.classList.add("card-url");
      a.href = urlText;
      
 
-     var emptyDiv = document.createElement('div');
+     let emptyDiv = document.createElement('div');
 
-     var p = document.createElement('p');
+     let p = document.createElement('p');
      p.textContent = titleText;
 
      br = document.createElement('br');
@@ -82,8 +82,8 @@ function resetAddCard() {
 
 function updateImageDisplay() {
      // TODO: accept only one image file
-     const curFiles = imageInput.files;
-     for(const file of curFiles) {
+     let curFiles = imageInput.files;
+     for(let file of curFiles) {
           bgImage = "url("+URL.createObjectURL(file)+")";
           addCardBg.style.backgroundImage = bgImage;
           imageLabel.textContent = file.name
