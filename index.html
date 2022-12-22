@@ -11,7 +11,7 @@
     <button onclick="addCard()">Add Cards</button>
     <main class="container" id="grid">
         <div class="card add" id="add-card">
-            <form class="card-add" id="add-card-bg" action="#">
+            <form class="card-add" id="add-card-bg" onsubmit="addCard(event)" action="#">
                 <h5>Create Directory</h5>
                 <div class="row">
                     <span class="material-icons">
@@ -34,7 +34,7 @@
                     <input type="file" name="" id="input-image" hidden onchange="updateImageDisplay()" accept="image/*">
                 </div>
                 
-                <button onclick="addCard()">&#10004;</button>
+                <input type="submit" value="&#10004;">
             </form>
         </div>
         <!--Sample card-->
