@@ -1,14 +1,28 @@
-var add = document.getElementById("add-card");
-//const gridComputedStyle = getComputedStyle(document.getElementById("grid"));
-var cardCount = 2;
-add.style.order = cardCount+1;
+// Elements
+var add;
+var addCardBg;
+var titleInput;
+var urlInput;
+var imageLabel;
+var imageInput;
 
-var addCardBg = document.getElementById("add-card-bg");
-var titleInput = document.getElementById("input-title");
-var urlInput = document.getElementById("input-url");
-var imageLabel = document.getElementById("label-image");
-var imageInput = document.getElementById("input-image");
-var bgImage = "none";
+// Values
+var cardCount;
+var bgImage;
+
+function init()
+{
+     add = document.getElementById("add-card");
+     addCardBg = document.getElementById("add-card-bg");
+     titleInput = document.getElementById("input-title");
+     urlInput = document.getElementById("input-url");
+     imageLabel = document.getElementById("label-image");
+     imageInput = document.getElementById("input-image");
+
+     bgImage = "none";
+     cardCount = 2;
+     add.style.order = cardCount+1;
+}
 
 function addCard(e) {
      e.preventDefault()
@@ -102,3 +116,5 @@ function Directory(title, url, image)
           return "url(" + this.image + ")";   
      };
 }
+
+init();
