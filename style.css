@@ -137,6 +137,8 @@ a {
     padding: 0.5em 0.5em;
     height: fit-content;
     font-size: x-small;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .row input:focus {
