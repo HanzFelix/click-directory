@@ -186,6 +186,7 @@ a {
     padding-right: 0.5em;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
 }
 p:hover {
     padding-bottom: 1.8em;
