@@ -31,7 +31,7 @@ function addCard(e) {
      v.classList.add("new-card");
      v.draggable = "true";
      if (bgImage != "none")
-          v.style.backgroundImage = bgImage;
+          v.style.backgroundImage = "url("+bgImage+")";
 
      let btnEdit = document.createElement('button');
      btnEdit.classList.add("edit-button");
@@ -84,9 +84,21 @@ function updateImageDisplay() {
      // TODO: accept only one image file
      let curFiles = imageInput.files;
      for(let file of curFiles) {
-          bgImage = "url("+URL.createObjectURL(file)+")";
-          addCardBg.style.backgroundImage = bgImage;
+          bgImage = URL.createObjectURL(file);
+          addCardBg.style.backgroundImage = "url("+bgImage+")";
           imageLabel.textContent = file.name
      }
 
+}
+
+function Directory(title, url, image)
+{
+     this.title = title;
+     this.url = url;
+     this.image = image;
+
+     this.backgroundImage = function()
+     {
+          return "url(" + this.image + ")";   
+     };
 }
