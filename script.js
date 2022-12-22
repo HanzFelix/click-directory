@@ -92,6 +92,7 @@ function createDirectory(e) {
           titleText = urlText;
 
      let newDir = bgImage != "none" ? new Directory(titleText, urlText, bgImage) : new Directory(titleText, urlText);
+     directories.push(newDir);
      createDirectoryCard(newDir);
 }
 
@@ -113,6 +114,19 @@ function updateImageDisplay() {
           imageLabel.textContent = file.name
      }
 
+}
+
+function saveJsonFile()
+{
+     let dataStr = JSON.stringify(directories);
+     let dataUri = "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
+
+     let fileName = "click_directory_backup.json";
+
+     let linkElement = document.createElement('a');
+     linkElement.setAttribute('href', dataUri);
+     linkElement.setAttribute('download', fileName);
+     linkElement.click();
 }
 
 class Directory {
