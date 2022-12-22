@@ -9,6 +9,7 @@ var imageInput;
 // Values
 var cardCount;
 var bgImage;
+var directories = [];
 
 function init()
 {
@@ -19,33 +20,28 @@ function init()
      imageLabel = document.getElementById("label-image");
      imageInput = document.getElementById("input-image");
 
+     directories.push(new Directory("Google", "https://www.google.com/"));
+     directories.push(new Directory("Discord", "https://discord.com/"));
+
+     cardCount = 0;
+     for (let i = 0; i < directories.length; i++) {
+          createDirectoryCard(directories[i]);
+          cardCount++;
+     }
+
      bgImage = "none";
-     cardCount = 2;
      add.style.order = cardCount+1;
 }
 
-function addCard(e) {
-     e.preventDefault()
-     
-     // Prepare values
-     let titleText = titleInput.value;
-     let urlText = urlInput.value
-
-     if (!urlText)
-          return
-
-     if (!titleInput.value) {
-          titleText = urlText;
-     }
-     
-
+function createDirectoryCard(dir)
+{
      // Construct New Card
      let v = document.createElement('div');
      v.classList.add("card");
      v.classList.add("new-card");
      v.draggable = "true";
      if (bgImage != "none")
-          v.style.backgroundImage = "url("+bgImage+")";
+          v.style.backgroundImage = "url(" + dir.image + ")";
 
      let btnEdit = document.createElement('button');
      btnEdit.classList.add("edit-button");
@@ -55,18 +51,18 @@ function addCard(e) {
      
      let a = document.createElement('a');
      a.classList.add("card-url");
-     a.href = urlText;
+     a.href = dir.url;
      
 
      let emptyDiv = document.createElement('div');
 
      let p = document.createElement('p');
-     p.textContent = titleText;
+     p.textContent = dir.title;
 
      br = document.createElement('br');
 
      span = document.createElement('span');
-     span.textContent = urlText;
+     span.textContent = dir.url;
 
      v.appendChild(btnEdit);
      v.appendChild(a);
@@ -75,14 +71,28 @@ function addCard(e) {
      p.appendChild(br);
      p.appendChild(span);
 
-     
-
      document.getElementById('grid').appendChild(v);
      cardCount++;
 
      resetAddCard()
      add.style.order = cardCount+1;
-     return false;
+}
+
+function createDirectory(e) {
+     e.preventDefault()
+     
+     // Prepare values
+     let titleText = titleInput.value;
+     let urlText = urlInput.value;
+
+     if (!urlText)
+          return
+
+     if (!titleInput.value)
+          titleText = urlText;
+
+     let newDir = bgImage != "none" ? new Directory(titleText, urlText, bgImage) : new Directory(titleText, urlText);
+     createDirectoryCard(newDir);
 }
 
 function resetAddCard() {
@@ -105,7 +115,7 @@ function updateImageDisplay() {
 
 }
 
-function Directory(title, url, image)
+function Directory(title, url, image = "test_image.jpg")
 {
      this.title = title;
      this.url = url;
