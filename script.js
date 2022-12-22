@@ -10,7 +10,9 @@ var imageLabel = document.getElementById("label-image");
 var imageInput = document.getElementById("input-image");
 var bgImage = "none";
 
-function addCard() {
+function addCard(e) {
+     e.preventDefault()
+     
      // Prepare values
      var titleText = titleInput.value;
      var urlText = urlInput.value
@@ -66,6 +68,7 @@ function addCard() {
 
      resetAddCard()
      add.style.order = cardCount+1;
+     return false;
 }
 
 function resetAddCard() {
