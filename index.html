@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <title>Document</title>
+    <title>Document</title>
 </head>
+
 <body>
     <button onclick="createDirectory(event)">Add Cards</button>
     <main class="container" id="grid">
@@ -19,7 +21,6 @@
                     </span>
                     <input type="text" name="" id="input-title" placeholder="Title" maxlength="64">
                 </div>
-                
                 <div class="row">
                     <span class="material-icons">
                         link
@@ -33,7 +34,7 @@
                     <label for="input-image" id="label-image">Browse...</label>
                     <input type="file" name="" id="input-image" hidden onchange="updateImageDisplay()" accept="image/*">
                 </div>
-                
+
                 <input type="submit" value="&#10004;">
             </form>
         </div>
@@ -41,27 +42,28 @@
         <div class="card" draggable="true">
             <button class="edit-button hidden material-icons">edit</button>
             <a href="https://google.com/" class="card-url" draggable="false" dr>
-                    <div></div>
-                    <p>
-                        Google.com<br>
-                        <span>
-                            https://google.com/aaaaaaaaaaaaaaaaaaaaaaa
-                        </span>
-                    </p>
+                <div></div>
+                <p>
+                    Google.com<br>
+                    <span>
+                        https://google.com/aaaaaaaaaaaaaaaaaaaaaaa
+                    </span>
+                </p>
             </a>
         </div>
         <div class="card">
             <button class="edit-button hidden">&bull;&bull;&bull;</button>
             <a href="#" class="card-url">
-                    <div></div>
-                    <p>Website.com Homepage - Click here to navigate thru the entire site<br>
-                        <span>
-                            https://google.com/
-                        </span>
-                    </p>
+                <div></div>
+                <p>Website.com Homepage - Click here to navigate thru the entire site<br>
+                    <span>
+                        https://google.com/
+                    </span>
+                </p>
             </a>
         </div>
     </main>
     <script src="script.js"></script>
 </body>
+
 </html>
