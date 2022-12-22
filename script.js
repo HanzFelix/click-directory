@@ -115,16 +115,16 @@ function updateImageDisplay() {
 
 }
 
-function Directory(title, url, image = "test_image.jpg")
-{
-     this.title = title;
-     this.url = url;
-     this.image = image;
+class Directory {
+     constructor(title, url, image = "test_image.jpg") {
+          this.title = title;
+          this.url = url;
+          this.image = image;
 
-     this.backgroundImage = function()
-     {
-          return "url(" + this.image + ")";   
-     };
+          this.backgroundImage = function () {
+               return "url(" + this.image + ")";
+          };
+     }
 }
 
 init();
