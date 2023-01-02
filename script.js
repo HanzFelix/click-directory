@@ -105,14 +105,12 @@ function resetAddCard() {
      imageLabel.textContent = "Browse..."
 }
 
-function updateImageDisplay() {
+function updateImageDisplay(imgInput) {
      // TODO: accept only one image file
-     let curFiles = imageInput.files;
-     for(let file of curFiles) {
-          bgImage = URL.createObjectURL(file);
-          addCardBg.style.backgroundImage = "url("+bgImage+")";
-          imageLabel.textContent = file.name
-     }
+     let file = imgInput.files[0];
+     bgImage = URL.createObjectURL(file);
+     addCardBg.style.backgroundImage = "url("+bgImage+")";
+     imageLabel.textContent = file.name
 
 }
 
