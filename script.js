@@ -11,6 +11,8 @@ var cardCount;
 var bgImage;
 var directories = [];
 
+const reader = new FileReader();
+
 function init()
 {
      add = document.getElementById("add-card");
@@ -31,6 +33,12 @@ function init()
 
      bgImage = "none";
      add.style.order = cardCount+1;
+     
+     // convert image file to base64 string on load of image
+     reader.addEventListener("load", () => {
+          bgImage = reader.result;
+          addCardBg.style.backgroundImage = "url("+bgImage+")";
+     });
 }
 
 function createDirectoryCard(dir)
@@ -106,12 +114,9 @@ function resetAddCard() {
 }
 
 function updateImageDisplay(imgInput) {
-     // TODO: accept only one image file
      let file = imgInput.files[0];
-     bgImage = URL.createObjectURL(file);
-     addCardBg.style.backgroundImage = "url("+bgImage+")";
+     reader.readAsDataURL(file);
      imageLabel.textContent = file.name
-
 }
 
 function saveJsonFile()
