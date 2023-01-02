@@ -12,6 +12,7 @@
 <body>
     <button onclick="saveToJsonFile()">Add Cards</button>
     <main class="container" id="grid">
+        <!--Add card-->
         <div class="card add" id="add-card">
             <form class="card-add" id="add-card-bg" onsubmit="createDirectory(event)" action="#">
                 <h5>Create Directory</h5>
@@ -40,8 +41,9 @@
         </div>
         <!--Sample card-->
         <div class="card" draggable="true">
+            <div class="edit-card">a</div>
             <button class="edit-button hidden material-icons">edit</button>
-            <a href="https://google.com/" class="card-url" draggable="false" dr>
+            <a href="https://google.com/" class="card-url" draggable="false">
                 <div></div>
                 <p>
                     Google.com<br>
