@@ -214,6 +214,15 @@ p:hover > span {
     padding: 4px;
 }
 
+.edit-card {
+    width: inherit;
+    background-color: rebeccapurple;
+    height: inherit;
+    z-index: 1;
+    display: none;
+    position: absolute;
+}
+
 /* Media Queries
 @media(min-width: 341px) {
     .container{
