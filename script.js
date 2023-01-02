@@ -119,7 +119,7 @@ function updateImageDisplay(imgInput) {
      imageLabel.textContent = file.name
 }
 
-function saveJsonFile()
+function saveToJsonFile()
 {
      let dataStr = JSON.stringify(directories);
      let dataUri = "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
