@@ -234,4 +234,5 @@ const check = (e) => {
 TODO
 delete unnecessary elements selected from id, especially forms
 turn off history in form input
+still can't update image background
 */
