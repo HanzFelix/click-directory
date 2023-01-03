@@ -13,36 +13,64 @@
     <button onclick="saveToJsonFile()">Add Cards</button>
     <main class="container" id="grid">
         <!--Add card-->
-        <div class="card add" id="add-card">
-            <form class="card-add" id="add-card-bg" onsubmit="createDirectory(event)" action="#">
-                <h5>Create Directory</h5>
+        <div class="card" id="add-card">
+            <!--Edit card's temp location-->
+            <form class="card-form card-edit" id="edit-card" action="#">
+                <h5>Edit Directory</h5>
                 <div class="row">
                     <span class="material-icons">
                         title
                     </span>
-                    <input type="text" name="" id="input-title" placeholder="Title" maxlength="64">
+                    <input type="text" name="title" id="edit-title" placeholder="Title" maxlength="64">
                 </div>
                 <div class="row">
                     <span class="material-icons">
                         link
                     </span>
-                    <input type="url" name="" id="input-url" placeholder="URL">
+                    <input type="url" name="url" id="edit-url" placeholder="URL">
                 </div>
                 <div class="row">
                     <span class="material-icons">
                         wallpaper
                     </span>
                     <label for="input-image" id="label-image">Browse...</label>
-                    <input type="file" name="" id="input-image" hidden onchange="updateImageDisplay(this)" accept="image/*">
+                    <input type="file" name="image" id="edit-image" hidden accept="image/*">
                 </div>
-
-                <input type="submit" value="&#10004;">
+                <div class="row button-row">
+                    <button class="material-icons check-button" value="update">check</button>
+                    <button class="material-icons delete-button" value="delete">delete</button>
+                    <button class="material-icons cancel-button" value="cancel">close</button>
+                </div>
+            </form>
+            <form class="card-form card-add" id="add-card-bg" action="#">
+                <h5>Create Directory</h5>
+                <div class="row">
+                    <span class="material-icons">
+                        title
+                    </span>
+                    <input type="text" name="title" id="input-title" placeholder="Title" maxlength="64">
+                </div>
+                <div class="row">
+                    <span class="material-icons">
+                        link
+                    </span>
+                    <input type="url" name="url" id="input-url" placeholder="URL">
+                </div>
+                <div class="row">
+                    <span class="material-icons">
+                        wallpaper
+                    </span>
+                    <label for="input-image" id="label-image">Browse...</label>
+                    <input type="file" name="image" id="input-image" hidden accept="image/*">
+                </div>
+                <div class="row button-row">
+                    <button class="material-icons check-button">check</button>
+                </div>
             </form>
         </div>
-        <!--Sample card-->
-        <div class="card" draggable="true">
-            <div class="edit-card">a</div>
-            <button class="edit-button hidden material-icons">edit</button>
+        <!--Sample card>
+        <div class="card">
+            <button class="edit-button hidden material-icons" onclick="showEditOverlay(this)">edit</button>
             <a href="https://google.com/" class="card-url" draggable="false">
                 <div></div>
                 <p>
@@ -54,7 +82,7 @@
             </a>
         </div>
         <div class="card">
-            <button class="edit-button hidden">&bull;&bull;&bull;</button>
+            <button class="edit-button hidden" onclick="showEditOverlay(this)">&bull;&bull;&bull;</button>
             <a href="#" class="card-url">
                 <div></div>
                 <p>Website.com Homepage - Click here to navigate thru the entire site<br>
@@ -63,7 +91,7 @@
                     </span>
                 </p>
             </a>
-        </div>
+        </div-->
     </main>
     <script src="script.js"></script>
 </body>

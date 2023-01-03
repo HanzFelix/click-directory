@@ -7,7 +7,7 @@
     :root {
         --gray: gray;
     }
-}
+}/**/
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -64,26 +64,38 @@ a {
 }
 
 /* Create Directory Card */
-.card-add {
+
+.card-form {
     z-index: 200;
-    transition: all 200ms ease-in-out;
-    background-image: none;
     box-sizing: border-box;
-    background: #f2f2f2;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    border-radius: 12px;
-    height: 100%;
     padding: 0;
+    justify-content: space-between;
+    height: 100%;
     background-size: cover;
     background-position: left;
+    border-radius: 12px;
 }
 
-.card-add > * {
+.card-add {
+    transition: all 200ms ease-in-out;
+    background-image: none;
+    background-color: #f2f2f2;
+}
+
+.card-edit {
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    z-index: 1;
+    animation: fade-in .3s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.card-form > * {
     margin: 0 1em;
 }
-.card-add > *:first-child {
+.card-form > *:first-child {
     margin: 0.8em 1em 0 1em;
     color: #333333;
     text-shadow: auto;
@@ -93,30 +105,65 @@ a {
         -0.1em 0 hsla(0, 0%, 90%, 0.8),
         0 -0.1em hsla(0, 0%, 90%, 0.8);
 }
-.card-add > *:last-child {
-    margin: 0 0 -1px 0;
+.card-form > *:last-child {
+    margin: 0;
 }
 
-.card-add label {
+.card-form label {
     cursor: pointer;
     color: gray;
 }
 
-.card-add input[type="submit"] {
+.card-form button {
     border: none;
     cursor: pointer;
-    background-color: hsla(0, 0%, 95%, 0.5);
-    border-radius: 0 0 12px 12px;
+    background-color: hsla(0, 0%, 95%, 0.8);
     transition: 200ms ease-in-out;
+    font-size: initial;
+    width: 100%;
 }
 
-.card-add input[type="submit"]:hover {
+.card-form > .button-row > button:first-child {
+    border-bottom-left-radius: 12px;
+}
+
+.card-form > .button-row > button:last-child {
+    border-bottom-right-radius: 12px;
+}
+
+.check-button {
+    color: hsla(180, 50%, 20%, 1);
+}
+
+.delete-button {
+    color: hsla(0, 70%, 30%, 1);
+}
+
+.cancel-button {
+    color: hsla(0, 0%, 40%, 1);
+}
+
+.check-button:hover {
     background-color: hsla(180, 50%, 20%, 1);
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: hsla(0, 70%, 30%, 1);
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: hsla(0, 0%, 30%, 1);
     color: white;
 }
 
 .card:hover .hidden {
     opacity: 1;
+}
+
+.gone {
+    display: none;
 }
 
 .row {
@@ -139,17 +186,19 @@ a {
     font-size: x-small;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: all ease-in-out 200ms;
 }
 
 .row input:focus {
     outline: none;
+    background-color: hsla(0, 0%, 85%, 1);
 }
 
 .new-card {
-    animation: append-animate .3s cubic-bezier(0.39, 0.575, 0.565, 1);
+    animation: fade-in .3s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
-.row .material-icons {
+.card-form > .row > span {
     font-size: large !important;
     margin-left: 0.1em; 
     color: hsla(0, 0%, 10%, 0.9);
@@ -158,6 +207,10 @@ a {
         0 0.1em hsla(0, 0%, 90%, 0.8),
         -0.1em 0 hsla(0, 0%, 90%, 0.8),
         0 -0.1em hsla(0, 0%, 90%, 0.8);
+}
+
+.edit-button:not(:first-child), .card-url:not(:nth-child(2)) {
+    display: none;
 }
 
 /* Clickable links */
@@ -199,12 +252,13 @@ p:hover > span {
 
 
 .edit-button {
+    background: #F2F2F2;
+    color: #333333;
     border-radius: 4px;
     margin: 0.8em;
     margin-left: 10em;
     opacity: 0;
     border: none;
-    background: #F2F2F2;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     transition: ease 200ms;
     cursor: pointer;
@@ -214,13 +268,9 @@ p:hover > span {
     padding: 4px;
 }
 
-.edit-card {
-    width: inherit;
-    background-color: rebeccapurple;
-    height: inherit;
-    z-index: 1;
-    display: none;
-    position: absolute;
+.edit-button:hover {
+    color: #000;
+    background: lightblue;
 }
 
 /* Media Queries
@@ -251,15 +301,6 @@ p:hover > span {
 }
 
 /* Animations */
-@keyframes append-animate {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;	
-	}
-}
-
 @keyframes fade-in {
     from {
         opacity: 0;

@@ -1,53 +1,69 @@
+// @ts-check
 // Elements
 var add;
-var addCardBg;
+var addCard;
+var editCard;
 var titleInput;
 var urlInput;
 var imageLabel;
 var imageInput;
+var titleEdit;
+var urlEdit;
+var imageEdit;
 
 // Values
 var cardCount;
 var bgImage;
 var directories = [];
+var curIndex;
 
 const reader = new FileReader();
 
 function init()
 {
      add = document.getElementById("add-card");
-     addCardBg = document.getElementById("add-card-bg");
+     addCard = document.getElementById("add-card-bg");
+     editCard = document.getElementById("edit-card");
      titleInput = document.getElementById("input-title");
      urlInput = document.getElementById("input-url");
      imageLabel = document.getElementById("label-image");
      imageInput = document.getElementById("input-image");
+     titleEdit = document.getElementById("edit-title");
+     urlEdit = document.getElementById("edit-url");
+     imageEdit = document.getElementById("edit-image");
 
      directories.push(new Directory("Google", "https://www.google.com/"));
      directories.push(new Directory("Discord", "https://discord.com/"));
 
      cardCount = 0;
      for (let i = 0; i < directories.length; i++) {
-          createDirectoryCard(directories[i]);
+          document.getElementById('grid').appendChild(createDirectoryCard(directories[i], i));
           cardCount++;
      }
 
      bgImage = "none";
-     add.style.order = cardCount+1;
+     add.style.order = (cardCount+1).toString();
      
      // convert image file to base64 string on load of image
-     reader.addEventListener("load", () => {
+     reader.addEventListener("load", function(e) {
           bgImage = reader.result;
-          addCardBg.style.backgroundImage = "url("+bgImage+")";
      });
+
+     addCard.addEventListener("submit", function(e) { createDirectory(e) })
+     editCard.addEventListener("submit", function(e) { editDirectory(e) })
+     imageEdit.addEventListener("change", function() { updateImageDisplay(this) })
+     imageInput.addEventListener("change", function() { updateImageDisplay(this) })
+
+     hideEditOverlay()
 }
 
-function createDirectoryCard(dir)
+function createDirectoryCard(dir, index)
 {
      // Construct New Card
      let v = document.createElement('div');
      v.classList.add("card");
      v.classList.add("new-card");
-     v.draggable = "true";
+     //v.draggable = true;
      if (bgImage != "none")
           v.style.backgroundImage = "url(" + dir.image + ")";
 
@@ -55,7 +71,9 @@ function createDirectoryCard(dir)
      btnEdit.classList.add("edit-button");
      btnEdit.classList.add("hidden");
      btnEdit.classList.add("material-icons");
-     btnEdit.textContent = "edit"
+     btnEdit.textContent = "edit";
+     btnEdit.dataset.index = index;
+     btnEdit.addEventListener("click", function() { showEditOverlay(this) });
      
      let a = document.createElement('a');
      a.classList.add("card-url");
@@ -67,9 +85,9 @@ function createDirectoryCard(dir)
      let p = document.createElement('p');
      p.textContent = dir.title;
 
-     br = document.createElement('br');
+     let br = document.createElement('br');
 
-     span = document.createElement('span');
+     let span = document.createElement('span');
      span.textContent = dir.url;
 
      v.appendChild(btnEdit);
@@ -79,11 +97,7 @@ function createDirectoryCard(dir)
      p.appendChild(br);
      p.appendChild(span);
 
-     document.getElementById('grid').appendChild(v);
-     cardCount++;
-
-     resetAddCard()
-     add.style.order = cardCount+1;
+     return v;
 }
 
 function createDirectory(e) {
@@ -96,27 +110,88 @@ function createDirectory(e) {
      if (!urlText)
           return
 
-     if (!titleInput.value)
+     if (!titleText)
           titleText = urlText;
 
      let newDir = bgImage != "none" ? new Directory(titleText, urlText, bgImage) : new Directory(titleText, urlText);
      directories.push(newDir);
-     createDirectoryCard(newDir);
+
+     document.getElementById('grid').appendChild(createDirectoryCard(newDir, cardCount));
+     cardCount++;
+
+     resetAddCard()
+     add.style.order = cardCount+1;
 }
 
 function resetAddCard() {
      titleInput.value = "";
      urlInput.value = "";
      bgImage = "none";
-     addCardBg.style.backgroundImage = bgImage;
-     console.log(imageLabel.textContent)
-     imageLabel.textContent = "Browse..."
+     addCard.style.backgroundImage = bgImage;
+     imageLabel.textContent = "Browse...";
 }
 
-function updateImageDisplay(imgInput) {
-     let file = imgInput.files[0];
+function updateImageDisplay(input) {
+     let file = input.files[0];
      reader.readAsDataURL(file);
-     imageLabel.textContent = file.name
+     input.parentElement.parentElement.style.backgroundImage = "url("+URL.createObjectURL(file)+")";
+     input.previousElementSibling.textContent = file.name; // TODO change to image label of 
+}
+
+function showEditOverlay(button)
+{
+     hideEditOverlay();
+     //button.parentElement.prepend(editCard);
+     button.parentElement.insertBefore(editCard, button);
+     curIndex = button.dataset.index;
+     titleEdit.value = directories[curIndex].title;
+     urlEdit.value = directories[curIndex].url;
+     editCard.classList.remove("gone");
+     // TODO get the current image
+}
+
+function hideEditOverlay() {
+    // editCard.remove();
+    editCard.classList.add("gone");
+}
+
+function editDirectory(e) {
+     e.preventDefault()
+     switch (e.submitter.value) {
+          case "update":
+               updateDirectory(e.target);
+               break;
+          case "delete":
+               deleteDirectory();
+               break;
+          case "cancel":
+               hideEditOverlay()
+               break;
+          default:
+               break;
+     }
+}
+
+function updateDirectory(form) {
+     let formData = new FormData(form);
+     let title = formData.get("title");
+     let url = formData.get("url");
+
+     if (!url)
+          return false;
+
+     if (!title)
+          title = url;
+
+     let newDir = bgImage != "none" ? new Directory(title, url, bgImage) : new Directory(title, url);
+     directories[curIndex] = newDir;
+     form.parentElement.replaceWith(createDirectoryCard(newDir, curIndex))
+     hideEditOverlay();
+     form.reset();
+}
+
+function deleteDirectory(params) {
+     alert("delete")
 }
 
 function saveToJsonFile()
@@ -145,3 +220,18 @@ class Directory {
 }
 
 init();
+
+
+/* get name
+const check = (e) => {
+    const form = new FormData(e.target);
+    const formula = form.get("formula");
+    console.log(formula);
+    return false
+};
+
+
+TODO
+delete unnecessary elements selected from id, especially forms
+turn off history in form input
+*/
