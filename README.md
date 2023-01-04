@@ -1,3 +1,3 @@
 # Click Directory
 
-Customizable homepage for browsers. Uses LocalStorage to save preferences of the site. Best used when bookmarked.
+Customizable quick access links for personal use. Uses LocalStorage to save preferences of the site.
