@@ -1,8 +1,8 @@
 // @ts-check
 // Elements
-var add;
 var addCard;
-var editCard;
+var addForm;
+var editForm;
 var titleInput;
 var urlInput;
 var imageLabel;
@@ -10,20 +10,22 @@ var imageInput;
 var titleEdit;
 var urlEdit;
 var imageEdit;
+var cardGrid;
 
 // Values
 var cardCount;
-var bgImage;
-var directories = [];
+var addImage;
+var editImage;
+const directories = [];
 var curIndex;
 
 const reader = new FileReader();
 
 function init()
 {
-     add = document.getElementById("add-card");
-     addCard = document.getElementById("add-card-bg");
-     editCard = document.getElementById("edit-card");
+     addCard = document.getElementById("add-card");
+     addForm = document.getElementById("add-form");
+     editForm = document.getElementById("edit-form");
      titleInput = document.getElementById("input-title");
      urlInput = document.getElementById("input-url");
      imageLabel = document.getElementById("label-image");
@@ -31,6 +33,7 @@ function init()
      titleEdit = document.getElementById("edit-title");
      urlEdit = document.getElementById("edit-url");
      imageEdit = document.getElementById("edit-image");
+     cardGrid = document.getElementById('grid')
 
      directories.push(new Directory("Google", "https://www.google.com/"));
      directories.push(new Directory("Discord", "https://discord.com/"));
@@ -41,16 +44,16 @@ function init()
           cardCount++;
      }
 
-     bgImage = "none";
-     add.style.order = (cardCount+1).toString();
+     addImage = "none";
+     addCard.style.order = (cardCount+1).toString();
      
      // convert image file to base64 string on load of image
      reader.addEventListener("load", function(e) {
-          bgImage = reader.result;
+          addImage = reader.result;
      });
 
-     addCard.addEventListener("submit", function(e) { createDirectory(e) })
-     editCard.addEventListener("submit", function(e) { editDirectory(e) })
+     addForm.addEventListener("submit", function(e) { createDirectory(e) })
+     editForm.addEventListener("submit", function(e) { editDirectory(e) })
      imageEdit.addEventListener("change", function() { updateImageDisplay(this) })
      imageInput.addEventListener("change", function() { updateImageDisplay(this) })
 
@@ -64,7 +67,7 @@ function createDirectoryCard(dir, index)
      v.classList.add("card");
      v.classList.add("new-card");
      //v.draggable = true;
-     if (bgImage != "none")
+     if (addImage != "none")
           v.style.backgroundImage = "url(" + dir.image + ")";
 
      let btnEdit = document.createElement('button');
@@ -104,55 +107,56 @@ function createDirectory(e) {
      e.preventDefault()
      
      // Prepare values
-     let titleText = titleInput.value;
-     let urlText = urlInput.value;
+     let formData = new FormData(e.target);
+     let title = formData.get("title");
+     let url = formData.get("url");
 
-     if (!urlText)
+     if (!url)
           return
 
-     if (!titleText)
-          titleText = urlText;
+     if (!title)
+          title = url.toString().substring(0, 64);
 
-     let newDir = bgImage != "none" ? new Directory(titleText, urlText, bgImage) : new Directory(titleText, urlText);
+     let newDir = addImage != "none" ? new Directory(title, url, addImage) : new Directory(title, url);
      directories.push(newDir);
 
-     document.getElementById('grid').appendChild(createDirectoryCard(newDir, cardCount));
+     cardGrid.appendChild(createDirectoryCard(newDir, cardCount));
      cardCount++;
 
-     resetAddCard()
-     add.style.order = cardCount+1;
+     resetForm(addForm)
+     addCard.style.order = cardCount+1;
 }
 
-function resetAddCard() {
-     titleInput.value = "";
-     urlInput.value = "";
-     bgImage = "none";
-     addCard.style.backgroundImage = bgImage;
-     imageLabel.textContent = "Browse...";
+function resetForm(form) {
+     form.reset()
+     addImage = "none";
+     editImage = "none";
+     form.style.backgroundImage = "none";
+     form.querySelector("label").textContent = "Browse...";
 }
 
 function updateImageDisplay(input) {
      let file = input.files[0];
      reader.readAsDataURL(file);
      input.parentElement.parentElement.style.backgroundImage = "url("+URL.createObjectURL(file)+")";
-     input.previousElementSibling.textContent = file.name; // TODO change to image label of 
+     input.previousElementSibling.textContent = file.name;
 }
 
 function showEditOverlay(button)
 {
      hideEditOverlay();
      //button.parentElement.prepend(editCard);
-     button.parentElement.insertBefore(editCard, button);
+     button.parentElement.insertBefore(editForm, button);
      curIndex = button.dataset.index;
      titleEdit.value = directories[curIndex].title;
      urlEdit.value = directories[curIndex].url;
-     editCard.classList.remove("gone");
-     // TODO get the current image
+     editForm.classList.remove("gone");
 }
 
 function hideEditOverlay() {
-    // editCard.remove();
-    editCard.classList.add("gone");
+    editForm.remove();
+    editForm.classList.add("gone");
+    resetForm(editForm)
 }
 
 function editDirectory(e) {
@@ -181,9 +185,9 @@ function updateDirectory(form) {
           return false;
 
      if (!title)
-          title = url;
+          title = url.toString().substring(0, 64);
 
-     let newDir = bgImage != "none" ? new Directory(title, url, bgImage) : new Directory(title, url);
+     let newDir = addImage != "none" ? new Directory(title, url, addImage) : new Directory(title, url);
      directories[curIndex] = newDir;
      form.parentElement.replaceWith(createDirectoryCard(newDir, curIndex))
      hideEditOverlay();
@@ -205,6 +209,11 @@ function saveToJsonFile()
      linkElement.setAttribute('href', dataUri);
      linkElement.setAttribute('download', fileName);
      linkElement.click();
+}
+
+function loadFromJsonFile()
+{
+     alert("load")
 }
 
 class Directory {

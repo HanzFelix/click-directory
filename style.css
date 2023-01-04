@@ -61,6 +61,8 @@ a {
 .card-url {
     align-items: flex-end;
     height: 100%;
+    opacity: 1;
+    transition: all ease-in-out 0.25s;
 }
 
 /* Create Directory Card */
@@ -210,7 +212,8 @@ a {
 }
 
 .edit-button:not(:first-child), .card-url:not(:nth-child(2)) {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
 }
 
 /* Clickable links */
@@ -228,6 +231,7 @@ a {
     background-color: hsla(128, 25%, 10%, 0.4);
     transition: all ease-in-out 200ms;
     position: relative;
+    word-break: break-word;
 }
 .card-url > p > span {
     position: absolute;
