@@ -16,7 +16,7 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --gray: gray;
-        --background: rgb(78, 18, 26);
+        --background: hsl(352, 55%, 20%);
         --add-card: hsl(130, 25%, 20%);
         --text-shadow: hsla(130, 27%, 0%, 0.8);
         --form-text: rgb(233, 233, 47);
@@ -25,14 +25,13 @@
         --submit-check: hsl(120, 60%, 45%);
         --submit-delete: hsl(0, 72%, 53%);
         --submit-cancel: hsl(0, 0%, 50%);
-        --form-placeholder: rgb(80, 88, 6);
+        --form-placeholder: hsl(66, 50%, 15%);
     }
 }/**/
 
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
-    padding-bottom: 50vh;
     background-color: var(--background);
 }
 
@@ -43,16 +42,10 @@ a {
 .container {
     display: grid;
     grid-auto-flow: row;
-    margin: 10vw auto 0 auto;
+    margin: 10vw auto 50vh auto;
     width: min-content;
     gap: 24px;
     transition: all ease-in-out 0.25s;
-}
-
-.empty-card {
-    box-sizing: border-box;
-    width: 196px;
-    height: 128px;
 }
 
 /* customizable background etc */
@@ -86,7 +79,6 @@ a {
 }
 
 /* Create Directory Card */
-
 .card-form {
     z-index: 200;
     box-sizing: border-box;
@@ -200,11 +192,11 @@ a {
     width: 100%;
     margin-right: 0.5em;
     margin-left: 0.5em;
+    padding: 0.5em 0.5em;
+    font-size: x-small;
     border: none;
     background-color: var(--input-background);
-    padding: 0.5em 0.5em;
     height: fit-content;
-    font-size: x-small;
     overflow: hidden;
     text-overflow: ellipsis;
     transition: all ease-in-out 200ms;
@@ -298,20 +290,47 @@ p:hover > span {
 
 .edit-button:hover {
     color: #000;
-    background: lightblue;
+    background: lightblue; /*temp*/
 }
 
-/* Media Queries
-@media(min-width: 341px) {
-    .container{
-        grid-template-columns: repeat(2, auto);
+/* Media Queries */
+@media(max-width: 621px) {
+    .card {
+        width: 128px;
+        height: 96px;
+        font-size: 0.75em;
     }
-}*/
-@media(min-width: 521px) {
-    .container{
-        grid-template-columns: repeat(2, auto);
+    .edit-button {
+        margin: 0.6em;
+        margin-left: 5.8em;
+    }
+
+    .row input, .row label {
+        width: 100%;
+        margin-right: 0.25em;
+        margin-left: 0.25em;
+        padding: 0.25em 0.5em;
+    }
+
+    .card-form > .row > span {
+        font-size: small !important;
     }
 }
+@media(min-width: 340px) {
+    .container{
+        grid-template-columns: repeat(2, auto);
+    }
+}/**/
+@media(min-width: 500px) {
+    .container{
+        grid-template-columns: repeat(3, auto);
+    }
+}/**/
+@media(min-width: 621px) {
+    .container{
+        grid-template-columns: repeat(2, auto);
+    }
+}/**/
 @media(min-width: 731px) {
     .container{
         grid-template-columns: repeat(3, auto);
