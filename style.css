@@ -23,7 +23,7 @@ a {
 .container {
     display: grid;
     grid-auto-flow: row;
-    margin: 20vh auto 0 auto;
+    margin: 10vw auto 0 auto;
     width: min-content;
     gap: 24px;
     transition: all ease-in-out 0.25s;
