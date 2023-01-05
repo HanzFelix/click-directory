@@ -39,7 +39,7 @@ a {
 .card {
     transition: all ease-in-out 0.25s;
     background-size: cover;
-    background-position: left;
+    background-position: center;
     width: 196px;
     height: 128px;
     border-radius: 12px;
