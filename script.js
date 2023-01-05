@@ -18,6 +18,7 @@ var addImage;
 var editImage;
 var directories = [];
 var curIndex;
+var curFileRead;
 
 const reader = new FileReader();
 
@@ -43,7 +44,7 @@ function init()
 
      cardCount = 0;
      for (let i = 0; i < directories.length; i++) {
-          document.getElementById('grid').appendChild(createDirectoryCard(directories[i], i));
+          document.getElementById('grid').appendChild(createDirectoryCard(directories[i]));
           cardCount++;
      }
 
@@ -52,20 +53,31 @@ function init()
      
      // convert image file to base64 string on load of image
      reader.addEventListener("load", function(e) {
-          addImage = reader.result;
+          console.log(curFileRead)
+          switch (curFileRead) {
+               case "input-image":
+                    addImage = reader.result;
+                    break;
+               case "edit-image":
+                    editImage = reader.result;
+                    break;
+               default:
+                    break;
+          }
+          
      });
 
      addForm.addEventListener("submit", function(e) { createDirectory(e) })
      editForm.addEventListener("submit", function(e) { editDirectory(e) })
-     imageEdit.addEventListener("change", function() { updateImageDisplay(this) })
-     imageInput.addEventListener("change", function() { updateImageDisplay(this) })
+     imageEdit.addEventListener("change", function(e) { updateImageDisplay(e) })
+     imageInput.addEventListener("change", function(e) { updateImageDisplay(e) })
 
      hideEditOverlay()
 }
 
 function initDefaultDirectories() {
-     directories.push(new Directory("Google", "https://www.google.com/"));
-     directories.push(new Directory("Discord", "https://discord.com/"));
+     directories.push(new Directory(1, "Google", "https://www.google.com/"));
+     directories.push(new Directory(2, "Discord", "https://discord.com/"));
 
      localStorage.setItem('directories', JSON.stringify(directories));
 }
@@ -78,22 +90,20 @@ function deleteLocalStorage() {
      localStorage.clear()
 }
 
-function createDirectoryCard(dir, index)
+function createDirectoryCard(dir)
 {
      // Construct New Card
      let v = document.createElement('div');
      v.classList.add("card");
      v.classList.add("new-card");
-     //v.draggable = true;
-     if (addImage != "none")
-          v.style.backgroundImage = "url(" + dir.image + ")";
+     v.style.backgroundImage = "url(" + dir.image + ")";
 
      let btnEdit = document.createElement('button');
      btnEdit.classList.add("edit-button");
      btnEdit.classList.add("hidden");
      btnEdit.classList.add("material-icons");
      btnEdit.textContent = "edit";
-     btnEdit.dataset.index = index;
+     btnEdit.dataset.id = dir.id;
      btnEdit.addEventListener("click", function() { showEditOverlay(this) });
      
      let a = document.createElement('a');
@@ -125,6 +135,8 @@ function createDirectory(e) {
      e.preventDefault()
      
      // Prepare values
+     let id = directories[directories.length - 1].id + 1;
+
      let formData = new FormData(e.target);
      let title = formData.get("title");
      let url = formData.get("url");
@@ -135,11 +147,11 @@ function createDirectory(e) {
      if (!title)
           title = url.toString().substring(0, 64);
 
-     let newDir = addImage != "none" ? new Directory(title, url, addImage) : new Directory(title, url);
+     let newDir = addImage != "none" ? new Directory(id, title, url, addImage) : new Directory(id, title, url);
      directories.push(newDir);
      localStorage.setItem('directories', JSON.stringify(directories));
 
-     cardGrid.appendChild(createDirectoryCard(newDir, cardCount));
+     cardGrid.appendChild(createDirectoryCard(newDir));
      cardCount++;
 
      resetForm(addForm)
@@ -154,22 +166,22 @@ function resetForm(form) {
      form.querySelector("label").textContent = "Browse...";
 }
 
-function updateImageDisplay(input) {
-     let file = input.files[0];
+function updateImageDisplay(e) {
+     let file = e.target.files[0];
+     curFileRead = e.target.id;
      reader.readAsDataURL(file);
-     input.parentElement.parentElement.style.backgroundImage = "url("+URL.createObjectURL(file)+")";
-     input.previousElementSibling.textContent = file.name;
+     e.target.parentElement.parentElement.style.backgroundImage = "url("+URL.createObjectURL(file)+")";
+     e.target.previousElementSibling.textContent = file.name;
 }
 
 function showEditOverlay(button)
 {
      hideEditOverlay();
-     //button.parentElement.prepend(editCard);
      button.parentElement.insertBefore(editForm, button);
-     curIndex = button.dataset.index;
+     curIndex = directories.findIndex(dir => dir.id == button.dataset.id);
      titleEdit.value = directories[curIndex].title;
      urlEdit.value = directories[curIndex].url;
-     addImage = directories[curIndex].image;
+     editImage = directories[curIndex].image;
      editForm.classList.remove("gone");
 }
 
@@ -186,7 +198,7 @@ function editDirectory(e) {
                updateDirectory(e.target);
                break;
           case "delete":
-               deleteDirectory();
+               deleteDirectory(e.target);
                break;
           case "cancel":
                hideEditOverlay()
@@ -207,16 +219,20 @@ function updateDirectory(form) {
      if (!title)
           title = url.toString().substring(0, 64);
 
-     let newDir = addImage != "none" ? new Directory(title, url, addImage) : new Directory(title, url);
-     directories[curIndex] = newDir;
-     form.parentElement.replaceWith(createDirectoryCard(newDir, curIndex));
+     directories[curIndex].title = title;
+     directories[curIndex].url = url;
+     directories[curIndex].image = editImage != "none" ? editImage : "test_image.jpg";
+
+     form.parentElement.replaceWith(createDirectoryCard(directories[curIndex]));
      localStorage.setItem('directories', JSON.stringify(directories));
      hideEditOverlay();
      form.reset();
 }
 
-function deleteDirectory(params) {
-     alert("delete")
+function deleteDirectory(form) {
+     directories.splice(curIndex, 1);
+     form.parentElement.remove();
+     localStorage.setItem('directories', JSON.stringify(directories));
 }
 
 function saveToJsonFile()
@@ -238,14 +254,11 @@ function loadFromJsonFile()
 }
 
 class Directory {
-     constructor(title, url, image = "test_image.jpg") {
+     constructor(id, title, url, image = "test_image.jpg") {
+          this.id = id;
           this.title = title;
           this.url = url;
           this.image = image;
-
-          this.backgroundImage = function () {
-               return "url(" + this.image + ")";
-          };
      }
 }
 
@@ -257,5 +270,8 @@ TODO
 delete unnecessary elements selected from id, especially forms
 turn off history in form input
 still can't update image background
-delete directory safely
+
+delete directory safely:
+Directory.id = directories[last].id++
+
 */
