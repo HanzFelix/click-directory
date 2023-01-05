@@ -228,7 +228,7 @@ a {
     border-radius: 0 0 12px 12px;
     font-weight: 600;
     font-size: smaller;
-    background-color: hsla(128, 25%, 10%, 0.4);
+    background-color: hsla(128, 0%, 10%, 0.4);
     transition: all ease-in-out 200ms;
     position: relative;
     word-break: break-word;
@@ -270,6 +270,7 @@ p:hover > span {
     position: absolute;
     font-size: medium !important;
     padding: 4px;
+    z-index: 2;
 }
 
 .edit-button:hover {
