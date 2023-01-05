@@ -3,9 +3,6 @@
 var addCard;
 var addForm;
 var editForm;
-var titleInput;
-var urlInput;
-var imageLabel;
 var imageInput;
 var titleEdit;
 var urlEdit;
@@ -27,9 +24,6 @@ function init()
      addCard = document.getElementById("add-card");
      addForm = document.getElementById("add-form");
      editForm = document.getElementById("edit-form");
-     titleInput = document.getElementById("input-title");
-     urlInput = document.getElementById("input-url");
-     imageLabel = document.getElementById("label-image");
      imageInput = document.getElementById("input-image");
      titleEdit = document.getElementById("edit-title");
      urlEdit = document.getElementById("edit-url");
@@ -268,8 +262,6 @@ init();
 /* 
 TODO
 delete unnecessary elements selected from id, especially forms
-turn off history in form input
-still can't update image background
 
 delete directory safely:
 Directory.id = directories[last].id++
