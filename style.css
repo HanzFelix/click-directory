@@ -44,7 +44,7 @@ a {
     grid-auto-flow: row;
     margin: 10vw auto 50vh auto;
     width: min-content;
-    gap: 24px;
+    gap: 1.5em;
     transition: all ease-in-out 0.25s;
 }
 
@@ -295,6 +295,10 @@ p:hover > span {
 
 /* Media Queries */
 @media(max-width: 621px) {
+    .container {
+        gap: 1em;
+    }
+
     .card {
         width: 128px;
         height: 96px;
