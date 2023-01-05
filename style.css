@@ -1,11 +1,31 @@
 :root {
     --primary: #6943ff;
     --gray: gray;
+    --background: #bb874c;
+    --add-card: #f2f2f2;
+    --text-shadow: hsla(0, 0%, 90%, 0.8);
+    --form-text: #333333;
+    --form-submit: hsla(0, 0%, 95%, 0.8);
+    --input-background: hsla(0, 0%, 85%, 0.8);
+    --submit-check: hsl(180, 50%, 20%);
+    --submit-delete: hsl(0, 70%, 30%);
+    --submit-cancel: hsl(0, 0%, 40%);
+    --form-placeholder: gray;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         --gray: gray;
+        --background: rgb(78, 18, 26);
+        --add-card: hsl(130, 25%, 20%);
+        --text-shadow: hsla(130, 27%, 0%, 0.8);
+        --form-text: rgb(233, 233, 47);
+        --form-submit: hsla(130, 25%, 20%, 0.9);
+        --input-background: hsla(55, 31%, 63%, 0.8);
+        --submit-check: hsl(120, 60%, 45%);
+        --submit-delete: hsl(0, 72%, 53%);
+        --submit-cancel: hsl(0, 0%, 50%);
+        --form-placeholder: rgb(80, 88, 6);
     }
 }/**/
 
@@ -13,13 +33,13 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding-bottom: 50vh;
+    background-color: var(--background);
 }
 
 a {
     text-decoration: none;
     color: initial;
 }
-
 .container {
     display: grid;
     grid-auto-flow: row;
@@ -83,7 +103,7 @@ a {
 .card-add {
     transition: all 200ms ease-in-out;
     background-image: none;
-    background-color: #f2f2f2;
+    background-color: var(--add-card);
 }
 
 .card-edit {
@@ -99,13 +119,13 @@ a {
 }
 .card-form > *:first-child {
     margin: 0.8em 1em 0 1em;
-    color: #333333;
+    color: var(--form-text);
     text-shadow: auto;
     text-shadow:
-        0.1em 0 hsla(0, 0%, 90%, 0.8),
-        0 0.1em hsla(0, 0%, 90%, 0.8),
-        -0.1em 0 hsla(0, 0%, 90%, 0.8),
-        0 -0.1em hsla(0, 0%, 90%, 0.8);
+        0.1em 0 var(--text-shadow),
+        0 0.1em var(--text-shadow),
+        -0.1em 0 var(--text-shadow),
+        0 -0.1em var(--text-shadow);
 }
 .card-form > *:last-child {
     margin: 0;
@@ -113,13 +133,12 @@ a {
 
 .card-form label {
     cursor: pointer;
-    color: gray;
 }
 
 .card-form button {
     border: none;
     cursor: pointer;
-    background-color: hsla(0, 0%, 95%, 0.8);
+    background-color: var(--form-submit);
     transition: 200ms ease-in-out;
     font-size: initial;
     width: 100%;
@@ -134,29 +153,29 @@ a {
 }
 
 .check-button {
-    color: hsla(180, 50%, 20%, 1);
+    color: var(--submit-check);
 }
 
 .delete-button {
-    color: hsla(0, 70%, 30%, 1);
+    color: var(--submit-delete);
 }
 
 .cancel-button {
-    color: hsla(0, 0%, 40%, 1);
+    color: var(--submit-cancel);
 }
 
 .check-button:hover {
-    background-color: hsla(180, 50%, 20%, 1);
+    background-color: var(--submit-check);
     color: white;
 }
 
 .delete-button:hover {
-    background-color: hsla(0, 70%, 30%, 1);
+    background-color: var(--submit-delete);
     color: white;
 }
 
 .cancel-button:hover {
-    background-color: hsla(0, 0%, 30%, 1);
+    background-color: var(--submit-cancel);
     color: white;
 }
 
@@ -182,13 +201,17 @@ a {
     margin-right: 0.5em;
     margin-left: 0.5em;
     border: none;
-    background-color: hsla(0, 0%, 85%, 0.8);
+    background-color: var(--input-background);
     padding: 0.5em 0.5em;
     height: fit-content;
     font-size: x-small;
     overflow: hidden;
     text-overflow: ellipsis;
     transition: all ease-in-out 200ms;
+}
+
+.row input::placeholder, .row label {
+    color: var(--form-placeholder);
 }
 
 .row input:focus {
@@ -203,12 +226,12 @@ a {
 .card-form > .row > span {
     font-size: large !important;
     margin-left: 0.1em; 
-    color: hsla(0, 0%, 10%, 0.9);
+    color: var(--form-text);
     text-shadow:
-        0.1em 0 hsla(0, 0%, 90%, 0.8),
-        0 0.1em hsla(0, 0%, 90%, 0.8),
-        -0.1em 0 hsla(0, 0%, 90%, 0.8),
-        0 -0.1em hsla(0, 0%, 90%, 0.8);
+        0.1em 0 var(--text-shadow),
+        0 0.1em var(--text-shadow),
+        -0.1em 0 var(--text-shadow),
+        0 -0.1em var(--text-shadow);
 }
 
 .edit-button:not(:first-child), .card-url:not(:nth-child(2)) {
