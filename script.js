@@ -35,10 +35,10 @@ function init()
      cardGrid = document.getElementById('grid');
 
      defaultImages = [
-          "img/default_bg_1.png", 
-          "img/default_bg_2.png", 
-          "img/default_bg_3.png", 
-          "img/default_bg_4.png"
+          "img/default_bg_1.jpg", 
+          "img/default_bg_2.jpg", 
+          "img/default_bg_3.jpg", 
+          "img/default_bg_4.jpg"
      ]
 
      if (!localStorage.getItem('directories')) {
