@@ -13,9 +13,13 @@ var cardGrid;
 var cardCount;
 var addImage;
 var editImage;
-var directories = [];
 var curIndex;
 var curFileRead;
+
+// Arrays
+var defaultImages;
+var directories = [];
+
 
 const reader = new FileReader();
 
@@ -28,7 +32,14 @@ function init()
      titleEdit = document.getElementById("edit-title");
      urlEdit = document.getElementById("edit-url");
      imageEdit = document.getElementById("edit-image");
-     cardGrid = document.getElementById('grid')
+     cardGrid = document.getElementById('grid');
+
+     defaultImages = [
+          "img/default_bg_1.png", 
+          "img/default_bg_2.png", 
+          "img/default_bg_3.png", 
+          "img/default_bg_4.png"
+     ]
 
      if (!localStorage.getItem('directories')) {
           initDefaultDirectories();
@@ -70,8 +81,7 @@ function init()
 }
 
 function initDefaultDirectories() {
-     directories.push(new Directory(1, "Google", "https://www.google.com/"));
-     directories.push(new Directory(2, "Discord", "https://discord.com/"));
+     directories.push(new Directory(1, "Example", "https://example.com/", getRandomArrayElement(defaultImages)));
 
      localStorage.setItem('directories', JSON.stringify(directories));
 }
@@ -141,7 +151,7 @@ function createDirectory(e) {
      if (!title)
           title = url.toString().substring(0, 64);
 
-     let newDir = addImage != "none" ? new Directory(id, title, url, addImage) : new Directory(id, title, url);
+     let newDir = addImage != "none" ? new Directory(id, title, url, addImage) : new Directory(id, title, url, getRandomArrayElement(defaultImages));
      directories.push(newDir);
      localStorage.setItem('directories', JSON.stringify(directories));
 
@@ -215,7 +225,7 @@ function updateDirectory(form) {
 
      directories[curIndex].title = title;
      directories[curIndex].url = url;
-     directories[curIndex].image = editImage != "none" ? editImage : "test_image.jpg";
+     directories[curIndex].image = editImage != "none" ? editImage : getRandomArrayElement(defaultImages);
 
      form.parentElement.replaceWith(createDirectoryCard(directories[curIndex]));
      localStorage.setItem('directories', JSON.stringify(directories));
@@ -245,10 +255,17 @@ function saveToJsonFile()
 function loadFromJsonFile()
 {
      alert("load")
+     return;
+}
+
+function getRandomArrayElement(arr)
+{
+     if (arr && arr.length)
+          return arr[Math.floor(Math.random() * arr.length)];
 }
 
 class Directory {
-     constructor(id, title, url, image = "test_image.jpg") {
+     constructor(id, title, url, image) {
           this.id = id;
           this.title = title;
           this.url = url;
