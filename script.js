@@ -47,11 +47,7 @@ function init()
           loadDirectories();
      }
 
-     cardCount = 0;
-     for (let i = 0; i < directories.length; i++) {
-          document.getElementById('grid').appendChild(createDirectoryCard(directories[i]));
-          cardCount++;
-     }
+     initDirectoryCards()
 
      addImage = "none";
      addCard.style.order = (cardCount+1).toString();
@@ -162,6 +158,14 @@ function createDirectory(e) {
      addCard.style.order = cardCount+1;
 }
 
+function initDirectoryCards() {
+     cardCount = 0;
+     for (let i = 0; i < directories.length; i++) {
+          document.getElementById('grid').appendChild(createDirectoryCard(directories[i]));
+          cardCount++;
+     }
+}
+
 function resetForm(form) {
      form.reset()
      addImage = "none";
@@ -254,8 +258,11 @@ function saveToJsonFile()
 
 function loadFromJsonFile()
 {
+     // TODO: Implement load from json
      alert("load")
      return;
+
+     location.reload()
 }
 
 function getRandomArrayElement(arr)
