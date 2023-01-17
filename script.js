@@ -1,4 +1,3 @@
-// @ts-check
 // Elements
 var addCard;
 var addForm;
@@ -8,6 +7,7 @@ var titleEdit;
 var urlEdit;
 var imageEdit;
 var cardGrid;
+var jsonLoad;
 
 // Values
 var cardCount;
@@ -15,6 +15,7 @@ var addImage;
 var editImage;
 var curIndex;
 var curFileRead;
+var loadedFileName;
 
 // Arrays
 var defaultImages;
@@ -33,6 +34,7 @@ function init()
      urlEdit = document.getElementById("edit-url");
      imageEdit = document.getElementById("edit-image");
      cardGrid = document.getElementById('grid');
+     jsonLoad = document.getElementById("load-json");
 
      defaultImages = [
           "img/default_bg_1.jpg", 
@@ -54,13 +56,21 @@ function init()
      
      // convert image file to base64 string on load of image
      reader.addEventListener("load", function(e) {
-          console.log(curFileRead)
           switch (curFileRead) {
                case "input-image":
                     addImage = reader.result;
+                    imageInput.parentElement.parentElement.style.backgroundImage = "url("+addImage+")";
+                    imageInput.previousElementSibling.textContent = loadedFileName;
                     break;
                case "edit-image":
                     editImage = reader.result;
+                    imageEdit.parentElement.parentElement.style.backgroundImage = "url("+editImage+")";
+                    imageEdit.previousElementSibling.textContent = loadedFileName;
+                    break;
+               case "load-json":
+                    localStorage.setItem('directories', reader.result);
+                    loadDirectories();
+                    initDirectoryCards();
                     break;
                default:
                     break;
@@ -70,8 +80,9 @@ function init()
 
      addForm.addEventListener("submit", function(e) { createDirectory(e) })
      editForm.addEventListener("submit", function(e) { editDirectory(e) })
-     imageEdit.addEventListener("change", function(e) { updateImageDisplay(e) })
-     imageInput.addEventListener("change", function(e) { updateImageDisplay(e) })
+     imageEdit.addEventListener("change", function(e) { loadImageFile(e) })
+     imageInput.addEventListener("change", function(e) { loadImageFile(e) })
+     jsonLoad.addEventListener("change", function(e) { loadJsonFile(e) })
 
      hideEditOverlay()
 }
@@ -87,7 +98,8 @@ function loadDirectories() {
 }
 
 function deleteLocalStorage() {
-     localStorage.clear()
+     localStorage.clear();
+     location.reload();
 }
 
 function createDirectoryCard(dir)
@@ -159,9 +171,11 @@ function createDirectory(e) {
 }
 
 function initDirectoryCards() {
+     cardGrid.replaceChildren();
+     cardGrid.appendChild(addCard);
      cardCount = 0;
      for (let i = 0; i < directories.length; i++) {
-          document.getElementById('grid').appendChild(createDirectoryCard(directories[i]));
+          cardGrid.appendChild(createDirectoryCard(directories[i]));
           cardCount++;
      }
 }
@@ -172,14 +186,6 @@ function resetForm(form) {
      editImage = "none";
      form.style.backgroundImage = "none";
      form.querySelector("label").textContent = "Browse...";
-}
-
-function updateImageDisplay(e) {
-     let file = e.target.files[0];
-     curFileRead = e.target.id;
-     reader.readAsDataURL(file);
-     e.target.parentElement.parentElement.style.backgroundImage = "url("+URL.createObjectURL(file)+")";
-     e.target.previousElementSibling.textContent = file.name;
 }
 
 function showEditOverlay(button)
@@ -256,13 +262,18 @@ function saveToJsonFile()
      linkElement.click();
 }
 
-function loadFromJsonFile()
+function loadJsonFile(e)
 {
-     // TODO: Implement load from json
-     alert("load")
-     return;
+     let file = e.target.files[0];
+     curFileRead = e.target.id;
+     reader.readAsText(file);
+}
 
-     location.reload()
+function loadImageFile(e) {
+     let file = e.target.files[0];
+     curFileRead = e.target.id;
+     loadedFileName = file.name;
+     reader.readAsDataURL(file);
 }
 
 function getRandomArrayElement(arr)
@@ -287,7 +298,7 @@ init();
 TODO
 delete unnecessary elements selected from id, especially forms
 
-delete directory safely:
-Directory.id = directories[last].id++
+UI for backup, load, and reset data
+confirmation dialog for deleting, and any other that could cause data loss.
 
 */
