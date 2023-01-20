@@ -95,6 +95,7 @@ a {
     transition: all 200ms ease-in-out;
     background-image: none;
     background-color: var(--add-card);
+    background-position: center;
 }
 
 .card-edit {
