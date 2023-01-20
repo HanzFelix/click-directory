@@ -99,7 +99,8 @@ function loadDirectories() {
 
 function deleteLocalStorage() {
      localStorage.clear();
-     location.reload();
+     initDefaultDirectories();
+     initDirectoryCards()
 }
 
 function createDirectoryCard(dir)
@@ -298,7 +299,8 @@ init();
 TODO
 delete unnecessary elements selected from id, especially forms
 
-UI for backup, load, and reset data
+UI for backup, load, and reset data, possibly in navbar
 confirmation dialog for deleting, and any other that could cause data loss.
+use pop up dialog when editing/creating on mobile instead.
 
 */
