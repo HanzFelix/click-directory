@@ -1,6 +1,6 @@
 # Click Directory
 
-Customizable landing page to easily access links and sites of the user. Data management is only within the browser and uses LocalStorage to save the user's preferences.
+Personal landing page directory to easily access links and sites of the user. Data management is only within the browser and uses LocalStorage to save the user's preferences. Supposedly for personal use but would work on modern browsers as well.
 
 # Features
 - [x] Manage the URLs and pages easily.
