@@ -49,7 +49,7 @@ function init()
           loadDirectories();
      }
 
-     initDirectoryCards()
+     //initDirectoryCards()
 
      addImage = "none";
      addCard.style.order = (cardCount+1).toString();
@@ -100,7 +100,7 @@ function loadDirectories() {
 function deleteLocalStorage() {
      localStorage.clear();
      initDefaultDirectories();
-     initDirectoryCards()
+     initDirectoryCards();
 }
 
 function createDirectoryCard(dir)

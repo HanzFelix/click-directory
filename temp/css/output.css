@@ -52,7 +52,7 @@
     background-color: var(--submit-cancel);
     color: white;
 }
-
+/*
 .edit-button {
     background: #F2F2F2;
     color: #333333;
@@ -73,5 +73,5 @@
 
 .edit-button:hover {
     color: #000;
-    background: lightblue; /*temp*/
-}
+    background: lightblue; /*temp
+}*/

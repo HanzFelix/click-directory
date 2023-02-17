@@ -1,196 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/output.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Click Directory</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <meta name="title" content="Click Directory — All links within a bookmark">
-    <meta name="description" content="A personal collection of your favorite links in one page.">
-</head>
-<body class="bg-slate-200">
-    <nav class="w-full bg-slate-600 p-4">
-        <button class="bg-slate-200" onclick="deleteLocalStorage()">Reset LocalStorage</button>
-        <button class="bg-slate-200" onclick="saveToJsonFile()">Create backup</button>
-        <label class="bg-slate-200" for="load-json">Load backup</label>
-        <input class="hidden" type="file" id="load-json">
-    </nav>
-    <main class="container mx-auto md:px-16 my-[10vw] px-8 grid gap-6 grid-cols-2 grid-flow-row-dense md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" id="grid">
-        <!--Add card-->
-        <div class="card shadow-md shadow-stone-400" id="add-card">
-            <!--Edit card's temp location-->
-            <form class="card-form card-edit" id="edit-form" action="#" autocomplete="off">
-                <h5>Edit Directory</h5>
-                <div class="row">
-                    <span class="material-icons">
-                        title
-                    </span>
-                    <input type="text" name="title" id="edit-title" placeholder="Title" maxlength="64" >
-                </div>
-                <div class="row">
-                    <span class="material-icons">
-                        link
-                    </span>
-                    <input type="url" name="url" id="edit-url" placeholder="URL">
-                </div>
-                <div class="row">
-                    <span class="material-icons">
-                        wallpaper
-                    </span>
-                    <label for="edit-image" id="label-image">Browse...</label>
-                    <input type="file" name="image" id="edit-image" hidden accept="image/*">
-                </div>
-                <div class="row button-row">
-                    <button class="material-icons check-button" value="update">check</button>
-                    <button class="material-icons delete-button" value="delete">delete</button>
-                    <button class="material-icons cancel-button" value="cancel">close</button>
-                </div>
-            </form>
-            <form class="card-form card-add bg-cover bg-left bg-slate-300 h-full hidden md:flex flex-col justify-end pt-3 gap-1 rounded-xl" id="add-form" action="#" autocomplete="off">
-                <div class="row flex box-border gap-1.5 mx-2">
-                    <span class="material-icons text-slate-500">
-                        title
-                    </span>
-                    <input class="w-full px-1" type="text" name="title" id="input-title" placeholder="Title" maxlength="64">
-                </div>
-                <div class="row flex box-border gap-1.5 mx-2">
-                    <span class="material-icons text-slate-500">
-                        link
-                    </span>
-                    <input class="w-full px-1" type="url" name="url" id="input-url" placeholder="URL">
-                </div>
-                <div class="row flex box-border gap-1.5 mx-2">
-                    <span class="material-icons text-slate-500">
-                        wallpaper
-                    </span>
-                    <label for="input-image" class="bg-white w-full truncate px-1" id="label-edit-image">Browse...</label>
-                    <input type="file" name="image" id="input-image" hidden accept="image/*">
-                </div>
-                <div class="row button-row flex box-border gap-1.5">
-                    <button class="w-full material-icons check-button first:rounded-bl-xl last:rounded-br-xl">check</button>
-                </div>
-            </form>
-            <div class="h-full w-full flex items-end justify-end p-4 md:hidden text-right bg-slate-500 rounded-xl">
-                <span class="text-xl text-slate-300 font-bold">Create Directory</span>
-            </div>
-        </div>
-        <!--Sample card>
-        <div class="card">
-            <button class="edit-button hidden material-icons" onclick="showEditOverlay(this)">edit</button>
-            <a href="https://google.com/" class="card-url" draggable="false">
-                <div></div>
-                <p>
-                    Google.com<br>
-                    <span>
-                        https://google.com/aaaaaaaaaaaaaaaaaaaaaaa
-                    </span>
-                </p>
-            </a>
-        </div>
-        <div class="card">
-            <button class="edit-button hidden" onclick="showEditOverlay(this)">&bull;&bull;&bull;</button>
-            <a href="#" class="card-url">
-                <div></div>
-                <p>Website.com Homepage - Click here to navigate thru the entire site<br>
-                    <span>
-                        https://google.com/
-                    </span>
-                </p>
-            </a>
-        </div-->
-    </main>
-    <script src="script.js"></script>
-</body>
-<!--body>
-    <button onclick="deleteLocalStorage()">Reset LocalStorage</button>
-    <button onclick="saveToJsonFile()">Create backup</button>
-    <input type="file" id="load-json">Load backup</button>
-    <main class="container" id="grid">
-        <!--Add card>
-        <div class="card" id="add-card">
-            <!--Edit card's temp location>
-            <form class="card-form card-edit" id="edit-form" action="#" autocomplete="off">
-                <h5>Edit Directory</h5>
-                <div class="row">
-                    <span class="material-icons">
-                        title
-                    </span>
-                    <input type="text" name="title" id="edit-title" placeholder="Title" maxlength="64" >
-                </div>
-                <div class="row">
-                    <span class="material-icons">
-                        link
-                    </span>
-                    <input type="url" name="url" id="edit-url" placeholder="URL">
-                </div>
-                <div class="row">
-                    <span class="material-icons">
-                        wallpaper
-                    </span>
-                    <label for="edit-image" id="label-image">Browse...</label>
-                    <input type="file" name="image" id="edit-image" hidden accept="image/*">
-                </div>
-                <div class="row button-row">
-                    <button class="material-icons check-button" value="update">check</button>
-                    <button class="material-icons delete-button" value="delete">delete</button>
-                    <button class="material-icons cancel-button" value="cancel">close</button>
-                </div>
-            </form>
-            <form class="card-form card-add" id="add-form" action="#" autocomplete="off">
-                <h5>Create Directory</h5>
-                <div class="row">
-                    <span class="material-icons">
-                        title
-                    </span>
-                    <input type="text" name="title" id="input-title" placeholder="Title" maxlength="64">
-                </div>
-                <div class="row">
-                    <span class="material-icons">
-                        link
-                    </span>
-                    <input type="url" name="url" id="input-url" placeholder="URL">
-                </div>
-                <div class="row">
-                    <span class="material-icons">
-                        wallpaper
-                    </span>
-                    <label for="input-image" id="label-edit-image">Browse...</label>
-                    <input type="file" name="image" id="input-image" hidden accept="image/*">
-                </div>
-                <div class="row button-row">
-                    <button class="material-icons check-button">check</button>
-                </div>
-            </form>
-        </div>
-        <!--Sample card>
-        <div class="card">
-            <button class="edit-button hidden material-icons" onclick="showEditOverlay(this)">edit</button>
-            <a href="https://google.com/" class="card-url" draggable="false">
-                <div></div>
-                <p>
-                    Google.com<br>
-                    <span>
-                        https://google.com/aaaaaaaaaaaaaaaaaaaaaaa
-                    </span>
-                </p>
-            </a>
-        </div>
-        <div class="card">
-            <button class="edit-button hidden" onclick="showEditOverlay(this)">&bull;&bull;&bull;</button>
-            <a href="#" class="card-url">
-                <div></div>
-                <p>Website.com Homepage - Click here to navigate thru the entire site<br>
-                    <span>
-                        https://google.com/
-                    </span>
-                </p>
-            </a>
-        </div>
-    </main>
-    <script src="script.js"></script>
-</body-->
-
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <meta
+      name="title"
+      content="Click Directory — All links within a bookmark"
+    />
+    <meta
+      name="description"
+      content="A personal collection of your favorite links in one page."
+    />
+    <title>Vite App</title>
+  </head>
+  <body class="bg-slate-200">
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
