@@ -1,14 +1,19 @@
 <script setup>
 import { ref } from "vue";
 import EditCard from "./EditCard.vue";
+const emit = defineEmits(["edit", "cancel"]);
 const enableEdit = ref(false);
 function showEditOverlay(bool) {
   enableEdit.value = bool;
+  if (bool) {
+    emit("edit");
+  } else {
+    emit("cancel");
+  }
 }
 </script>
 <template>
   <div
-    v-if="!enableEdit"
     class="transition-all group/z bg-cover bg-center rounded-xl h-full w-full"
     style="background-image: url('./src/assets/default_bg_1.jpg')"
   >
@@ -37,5 +42,5 @@ function showEditOverlay(bool) {
       </div>
     </a>
   </div>
-  <EditCard v-if="enableEdit" @cancel="showEditOverlay(false)" />
+  <!--EditCard v-if="enableEdit" @cancel="showEditOverlay(false)" /-->
 </template>

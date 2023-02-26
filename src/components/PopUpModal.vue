@@ -1,10 +1,9 @@
 <script setup>
-import ButtonAlternative from "./ButtonAlternative.vue";
-import ButtonPrimary from "./ButtonPrimary.vue";
+import EditCard from "./EditCard.vue";
 
 const props = defineProps({
   show: { default: false },
-  title: { type: String, default: "Pop-up" },
+  title: { type: String, default: "Modal" },
   message: { type: String, default: "No Message" },
 });
 
@@ -26,11 +25,11 @@ function emitAsConfirm() {
   >
     <!-- Modal content -->
     <div
-      class="relative flex max-w-xl flex-col gap-2 rounded-2xl bg-white p-4 shadow-md"
+      class="relative flex max-w-xl w-96 flex-col rounded-2xl bg-slate-300 shadow-md"
     >
       <!-- Modal header -->
-      <header class="flex items-start justify-between rounded-t p-2">
-        <h3 class="text-xl text-zinc-700">
+      <header class="flex items-start justify-between rounded-t pt-4 pr-2 pl-4">
+        <h3 class="text-xl text-slate-500">
           {{ title }}
         </h3>
         <button
@@ -56,20 +55,22 @@ function emitAsConfirm() {
         </button>
       </header>
       <!-- Modal body -->
-      <div class="p-2">
-        <p class="text-base leading-relaxed">
-          {{ message }}
-        </p>
-      </div>
-      <!-- Modal footer -->
-      <footer class="flex flex-row-reverse flex-wrap-reverse gap-x-2">
-        <ButtonAlternative text="Cancel" :click-action="emitAsCancel" />
+      <slot name="body">
+        <div class="p-2">
+          <p class="text-base leading-relaxed">
+            {{ message }}
+          </p>
+        </div>
+        <!-- Modal footer -->
+        <footer class="flex flex-row-reverse flex-wrap-reverse gap-x-2">
+          <!--ButtonAlternative text="Cancel" :click-action="emitAsCancel" />
         <ButtonPrimary
           text="Delete"
           :click-action="emitAsConfirm"
           variant="Danger"
-        />
-      </footer>
+        /-->
+        </footer>
+      </slot>
     </div>
   </div>
 </template>

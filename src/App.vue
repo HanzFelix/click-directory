@@ -5,6 +5,17 @@ import HelloWorld from "./components/HelloWorld.vue";
 import CardItem from "./components/CardItem.vue";
 import AddCard from "./components/AddCard.vue";
 import EditCard from "./components/EditCard.vue";
+import EditModal from "./components/EditModal.vue";
+import PopUpModal from "./components/PopUpModal.vue";
+import { ref } from "vue";
+const showEdit = ref(false);
+const showAdd = ref(false);
+function showEditModal(bool) {
+  showEdit.value = bool;
+}
+function showAddModal(bool) {
+  showAdd.value = bool;
+}
 </script>
 <template>
   <main
@@ -12,27 +23,57 @@ import EditCard from "./components/EditCard.vue";
     id="grid"
   >
     <!--Sample card-->
-    <CardItem v-for="i in 5"><DirectoryCard /></CardItem>
-    <CardItem><AddCard /></CardItem>
-    <!--temp-->
-    <CardItem><EditCard /></CardItem>
+    <CardItem v-for="i in 5"
+      ><DirectoryCard
+        @edit="showEditModal(true)"
+        @cancel="showEditModal(false)"
+    /></CardItem>
+    <!--CardItem><AddCard /></CardItem>
+    <CardItem><EditCard /></CardItem-->
   </main>
-  <nav class="w-full bg-slate-600 p-4 flex gap-4 fixed bottom-0 justify-end">
-    <button class="text-slate-200 flex gap-2" onclick="deleteLocalStorage()">
-      <span class="material-icons">delete</span>
-      <span class="hidden md:inline-block">Reset to default</span>
-    </button>
-    <button class="text-slate-200 flex gap-2" onclick="saveToJsonFile()">
-      <span class="material-icons">backup</span>
-      <span class="hidden md:inline-block">Create backup</span>
-    </button>
-    <label class="text-slate-200 flex cursor-pointer gap-2" for="load-json"
-      ><span class="material-icons">settings_backup_restore</span>
+  <footer class="w-full bg-slate-600 p-4 flex fixed bottom-0 justify-between">
+    <section class="">
+      <button
+        @click="showAddModal(true)"
+        class="-translate-y-10 shadow-slate-500 bg-slate-200 text-slate-700 items-center gap-1 flex absolute p-4 ml-4 shadow-sm rounded-xl"
+      >
+        <span class="material-icons">add</span>
+        <span class="inline-block">Add</span>
+      </button>
+    </section>
+    <section class="gap-4 flex">
+      <button class="text-slate-200 flex gap-2" onclick="deleteLocalStorage()">
+        <span class="material-icons">delete</span>
+        <span class="hidden md:inline-block">Reset to default</span>
+      </button>
+      <button class="text-slate-200 flex gap-2" onclick="saveToJsonFile()">
+        <span class="material-icons">backup</span>
+        <span class="hidden md:inline-block">Create backup</span>
+      </button>
+      <label class="text-slate-200 flex cursor-pointer gap-2" for="load-json"
+        ><span class="material-icons">settings_backup_restore</span>
 
-      <span class="hidden md:inline-block">Restore from backup</span></label
-    >
-    <input class="hidden" type="file" id="load-json" />
-  </nav>
+        <span class="hidden md:inline-block">Restore from backup</span></label
+      >
+      <input class="hidden" type="file" id="load-json" />
+    </section>
+  </footer>
+
+  <PopUpModal
+    :show="showEdit"
+    @cancel="showEditModal(false)"
+    title="Edit Directory"
+  >
+    <template #body> <EditModal /> </template>
+  </PopUpModal>
+
+  <PopUpModal
+    :show="showAdd"
+    @cancel="showAddModal(false)"
+    title="Add Directory"
+  >
+    <template #body> <EditModal /> </template>
+  </PopUpModal>
 </template>
 <!--template>
   <header>

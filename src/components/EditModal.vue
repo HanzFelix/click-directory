@@ -6,21 +6,18 @@ function updateDir() {
 function deleteDir() {
   emit("delete");
 }
-function exitEdit() {
-  emit("cancel");
-}
 </script>
 <template>
   <form
-    class="card-form card-add bg-cover bg-left bg-slate-300 h-full w-full absolute top-0 left-0 flex flex-col justify-between md:justify-end pt-3 gap-1 rounded-xl"
+    class="card-form card-add bg-cover bg-left bg-slate-300 h-full w-full flex flex-col justify-between md:justify-end pt-2 gap-2 rounded-2xl"
     id="edit-form"
     action="#"
     autocomplete="off"
   >
-    <div class="flex box-border gap-1.5 mx-2">
-      <span class="material-icons text-slate-500"> title </span>
+    <div class="flex box-border gap-1.5 mx-4">
+      <span class="material-icons text-slate-500 text-3xl rou"> title </span>
       <input
-        class="w-full px-1"
+        class="w-full py-1 px-2"
         type="text"
         name="title"
         id="edit-title"
@@ -28,27 +25,27 @@ function exitEdit() {
         maxlength="64"
       />
     </div>
-    <div class="row flex box-border gap-1.5 mx-2">
-      <span class="material-icons text-slate-500"> link </span>
+    <div class="flex box-border gap-1.5 mx-4">
+      <span class="material-icons text-slate-500 text-3xl"> link </span>
       <input
-        class="w-full px-1"
+        class="w-full py-1 px-2"
         type="url"
         name="url"
         id="edit-url"
         placeholder="URL"
       />
     </div>
-    <div class="row flex box-border gap-1.5 mx-2">
-      <span class="material-icons text-slate-500"> wallpaper </span>
+    <div class="flex box-border gap-1.5 mx-4">
+      <span class="material-icons text-slate-500 text-3xl"> wallpaper </span>
       <label
-        class="bg-white w-full truncate px-1"
+        class="bg-white w-full truncate py-1 px-2"
         for="edit-image"
         id="label-image"
         >Browse...</label
       >
       <input type="file" name="image" id="edit-image" hidden accept="image/*" />
     </div>
-    <footer class="row button-row flex box-border gap-1.5 material-icons">
+    <footer class="flex box-border h-8 gap-1.5 material-icons">
       <button
         class="w-full text-green-600 hover:bg-green-600 hover:text-white first:rounded-bl-xl last:rounded-br-xl"
         value="update"
@@ -62,14 +59,6 @@ function exitEdit() {
         @click="deleteDir"
       >
         delete
-      </button>
-      <button
-        class="w-full text-slate-600 hover:bg-slate-600 hover:text-white first:rounded-bl-xl last:rounded-br-xl"
-        value="cancel"
-        type="button"
-        @click="exitEdit"
-      >
-        close
       </button>
     </footer>
   </form>
