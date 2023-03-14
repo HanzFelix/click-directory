@@ -3,11 +3,14 @@ import { RouterLink, RouterView } from "vue-router";
 import DirectoryCard from "./components/DirectoryCard.vue";
 import HelloWorld from "./components/HelloWorld.vue";
 import CardItem from "./components/CardItem.vue";
-import AddCard from "./components/AddCard.vue";
+import AddModal from "./components/AddModal.vue";
 import EditCard from "./components/EditCard.vue";
 import EditModal from "./components/EditModal.vue";
 import PopUpModal from "./components/PopUpModal.vue";
+import { useCounterStore } from "./stores/counter";
 import { ref } from "vue";
+
+const counterStore = useCounterStore();
 const showEdit = ref(false);
 const showAdd = ref(false);
 function showEditModal(bool) {
@@ -23,8 +26,10 @@ function showAddModal(bool) {
     id="grid"
   >
     <!--Sample card-->
-    <CardItem v-for="i in 5"
+    <CardItem v-for="(directory, index) in counterStore.directories"
       ><DirectoryCard
+        :id="index"
+        :directory="directory"
         @edit="showEditModal(true)"
         @cancel="showEditModal(false)"
     /></CardItem>
@@ -35,14 +40,18 @@ function showAddModal(bool) {
     <section class="">
       <button
         @click="showAddModal(true)"
-        class="-translate-y-10 shadow-slate-500 bg-slate-200 text-slate-700 items-center gap-1 flex absolute p-4 ml-4 shadow-sm rounded-xl"
+        class="-translate-y-10 shadow-slate-500 bg-slate-200 text-slate-700 items-center gap-1 flex absolute p-4 ml-4 shadow-sm rounded-xl hover:bg-slate-50 transition-colors"
       >
         <span class="material-icons">add</span>
         <span class="inline-block">Add</span>
       </button>
     </section>
     <section class="gap-4 flex">
-      <button class="text-slate-200 flex gap-2" onclick="deleteLocalStorage()">
+      <button
+        class="text-slate-200 flex gap-2"
+        onclick="
+     localStorage.clear()"
+      >
         <span class="material-icons">delete</span>
         <span class="hidden md:inline-block">Reset to default</span>
       </button>
@@ -61,18 +70,18 @@ function showAddModal(bool) {
 
   <PopUpModal
     :show="showEdit"
-    @cancel="showEditModal(false)"
+    @close="showEditModal(false)"
     title="Edit Directory"
   >
-    <template #body> <EditModal /> </template>
+    <template #body> <EditModal @close="showEditModal(false)" /> </template>
   </PopUpModal>
 
   <PopUpModal
     :show="showAdd"
-    @cancel="showAddModal(false)"
+    @close="showAddModal(false)"
     title="Add Directory"
   >
-    <template #body> <EditModal /> </template>
+    <template #body> <AddModal @close="showAddModal(false)" /> </template>
   </PopUpModal>
 </template>
 <!--template>

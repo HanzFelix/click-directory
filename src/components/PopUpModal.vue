@@ -1,18 +1,17 @@
 <script setup>
 import EditCard from "./EditCard.vue";
+import { useCounterStore } from "../stores/counter";
 
+const counterStore = useCounterStore();
 const props = defineProps({
   show: { default: false },
   title: { type: String, default: "Modal" },
   message: { type: String, default: "No Message" },
 });
 
-const emit = defineEmits(["confirm", "cancel"]);
-function emitAsCancel() {
-  emit("cancel");
-}
-function emitAsConfirm() {
-  emit("confirm");
+const emit = defineEmits(["close"]);
+function emitAsClose() {
+  emit("close");
 }
 </script>
 
@@ -20,22 +19,25 @@ function emitAsConfirm() {
   <!-- Model Background -->
   <div
     v-if="show"
-    @click.self="emitAsCancel"
+    @click.self="emitAsClose"
     class="fixed inset-0 z-50 flex w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black bg-opacity-50 px-8"
   >
     <!-- Modal content -->
     <div
-      class="relative flex max-w-xl w-96 flex-col rounded-2xl bg-slate-300 shadow-md"
+      class="relative flex max-w-xl w-96 flex-col rounded-2xl bg-slate-300 shadow-md bg-cover bg-center"
+      :style="{
+        'background-image': 'url(' + counterStore.tempDirectory.image + ')',
+      }"
     >
       <!-- Modal header -->
       <header class="flex items-start justify-between rounded-t pt-4 pr-2 pl-4">
-        <h3 class="text-xl text-slate-500">
+        <h3 class="text-xl text-slate-500 outline-red-500 shadow-sm">
           {{ title }}
         </h3>
         <button
           type="button"
-          @click="emitAsCancel"
-          class="ml-auto inline-flex items-center rounded-lg p-1.5 text-sm text-zinc-400 hover:bg-zinc-200 hover:text-orange-600"
+          @click="emitAsClose"
+          class="ml-auto inline-flex items-center rounded-lg p-1.5 text-sm text-zinc-400 hover:bg-zinc-200 hover:text-orange-600 transition-colors"
           data-modal-hide="defaultModal"
         >
           <svg
