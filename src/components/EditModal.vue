@@ -3,6 +3,7 @@ import { useCounterStore } from "../stores/counter";
 
 const counterStore = useCounterStore();
 const emit = defineEmits(["close"]);
+const reader = new FileReader();
 
 function updateDir() {
   if (counterStore.updateDirectory()) {
@@ -14,6 +15,16 @@ function deleteDir() {
   if (counterStore.deleteDirectory()) {
     emit("close");
   }
+}
+
+function loadImageFile(e) {
+  let file = e.target.files[0];
+  counterStore.tempImageName = file.name;
+  reader.readAsDataURL(file);
+  reader.onload = (event) => {
+    counterStore.tempDirectory.image = event.target.result;
+    console.log("Image loaded");
+  };
 }
 </script>
 <template>
@@ -52,9 +63,17 @@ function deleteDir() {
         class="bg-white w-full truncate py-1 px-2"
         for="edit-image"
         id="label-image"
-        >Browse...</label
       >
-      <input type="file" name="image" id="edit-image" hidden accept="image/*" />
+        {{ counterStore.tempImageName }}
+      </label>
+      <input
+        type="file"
+        name="image"
+        id="edit-image"
+        hidden
+        accept="image/*"
+        @change="loadImageFile($event)"
+      />
     </div>
     <footer class="flex box-border h-8 material-icons">
       <button

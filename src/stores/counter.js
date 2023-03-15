@@ -44,7 +44,8 @@ export const useCounterStore = defineStore("counter", {
           .substring(0, 64);
 
       if (this.tempDirectory.image == "none")
-        this.tempDirectory.image = getRandomArrayElement(defaultImages);
+        this.tempDirectory.image =
+          defaultImages[Math.floor(Math.random() * defaultImages.length)];
 
       // add directory and reset
       this.directories.push(this.tempDirectory);
