@@ -28,4 +28,4 @@ coverage
 *.sw?
 
 # dist
-.dist/*
+/dist/*
