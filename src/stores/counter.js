@@ -34,10 +34,6 @@ export const useCounterStore = defineStore("counter", {
   },
   actions: {
     createDirectory() {
-      // self-correcting
-      this.tempDirectory.id =
-        this.directories[this.directories.length - 1].id + 1;
-
       if (!this.tempDirectory.title)
         this.tempDirectory.title = this.tempDirectory.url
           .toString()
