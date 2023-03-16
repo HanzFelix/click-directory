@@ -71,7 +71,7 @@ function loadImageFile(e) {
     </div>
     <footer class="flex box-border h-8 gap-1.5 material-icons">
       <button
-        class="w-full bg-slate-300 transition-colors text-green-600 hover:bg-green-600 hover:text-white first:rounded-bl-xl last:rounded-br-xl"
+        class="w-full bg-slate-600 transition-colors text-green-600 hover:bg-green-600 hover:text-white first:rounded-bl-xl last:rounded-br-xl"
         value="update"
         @click.stop.prevent="createDir"
       >
