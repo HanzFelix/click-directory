@@ -17,6 +17,9 @@ function showEditModal(bool) {
   showEdit.value = bool;
 }
 function showAddModal(bool) {
+  if(bool)
+    counterStore.resetTempDirectory();
+  
   showAdd.value = bool;
 }
 </script>

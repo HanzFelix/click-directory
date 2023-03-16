@@ -1,17 +1,21 @@
 import { ref, computed } from "vue";
 import { defineStore, mapActions } from "pinia";
+import defaultBg1 from '../assets/default_bg_1.jpg'
+import defaultBg2 from '../assets/default_bg_1.jpg'
+import defaultBg3 from '../assets/default_bg_1.jpg'
+import defaultBg4 from '../assets/default_bg_1.jpg'
 
 const defaultDirectory = {
   title: "Example",
   url: "https://example.com/",
-  image: "../src/assets/default_bg_1.jpg",
+  image: defaultBg1,
 };
 
 const defaultImages = [
-  "../src/assets/default_bg_1.jpg",
-  "../src/assets/default_bg_2.jpg",
-  "../src/assets/default_bg_3.jpg",
-  "../src/assets/default_bg_4.jpg",
+  defaultBg1,
+  defaultBg2,
+  defaultBg3,
+  defaultBg4,
 ];
 
 export const useCounterStore = defineStore("counter", {
@@ -88,6 +92,13 @@ export const useCounterStore = defineStore("counter", {
       localStorage.setItem("directories", JSON.stringify(this.directories));
       return true;
     },
+    resetTempDirectory() {
+      this.tempDirectory = {
+        title: "",
+        url: "",
+        image: "none",
+      };
+    }
   },
 });
 
