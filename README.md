@@ -1,4 +1,18 @@
-# click-directory
+# Click Directory
+
+Customizable landing page to easily access links and sites of the user. It uses LocalStorage to save the user's preferences and configuration of the site.
+
+# Features
+
+- [x] Manage the URLs and pages easily.
+- [x] Compatible in all screen sizes.
+- [ ] Customizable theme provided by the user, for both dark mode and light mode.
+- [ ] Back up preferences in a JSON file for future use.
+- [ ] Rearrange the links with drag and drop.
+- [ ] Revert changes made within the session.
+- [ ] Comfortable UX design in touch screen devices.
+
+# Installation
 
 This template should help get you started developing with Vue 3 in Vite.
 
