@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --primary: #6943ff;
+    --gray: gray;
+    --background: #bb874c;
+    --add-card: #f2f2f2;
+    --text-shadow: hsla(0, 0%, 90%, 0.8);
+    --form-text: #333333;
+    --form-submit: hsla(0, 0%, 95%, 0.8);
+    --input-background: hsla(0, 0%, 85%, 0.8);
+    --submit-check: hsl(180, 50%, 20%);
+    --submit-delete: hsl(0, 70%, 30%);
+    --submit-cancel: hsl(0, 0%, 40%);
+    --form-placeholder: gray;
+}
+
+.card {
+    transition: all ease-in-out 0.25s;
+    background-size: cover;
+    background-position: center;
+    height: 128px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.25);
+}
+
+.check-button {
+    color: var(--submit-check);
+}
+
+.delete-button {
+    color: var(--submit-delete);
+}
+
+.cancel-button {
+    color: var(--submit-cancel);
+}
+
+.check-button:hover {
+    background-color: var(--submit-check);
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: var(--submit-delete);
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: var(--submit-cancel);
+    color: white;
+}
+/*
+.edit-button {
+    background: #F2F2F2;
+    color: #333333;
+    border-radius: 4px;
+    margin: 0.8em;
+    margin-left: 10em;
+    opacity: 0;
+    border: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: ease 200ms;
+    cursor: pointer;
+    aspect-ratio: 1 / 1;
+    position: absolute;
+    font-size: medium !important;
+    padding: 4px;
+    z-index: 2;
+}
+
+.edit-button:hover {
+    color: #000;
+    background: lightblue; /*temp
+}*/

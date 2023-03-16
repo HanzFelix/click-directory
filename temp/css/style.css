@@ -1,0 +1,366 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --primary: #6943ff;
+    --gray: gray;
+    --background: #bb874c;
+    --add-card: #f2f2f2;
+    --text-shadow: hsla(0, 0%, 90%, 0.8);
+    --form-text: #333333;
+    --form-submit: hsla(0, 0%, 95%, 0.8);
+    --input-background: hsla(0, 0%, 85%, 0.8);
+    --submit-check: hsl(180, 50%, 20%);
+    --submit-delete: hsl(0, 70%, 30%);
+    --submit-cancel: hsl(0, 0%, 40%);
+    --form-placeholder: gray;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --gray: gray;
+        --background: hsl(352, 55%, 20%);
+        --add-card: hsl(130, 25%, 20%);
+        --text-shadow: hsla(130, 27%, 0%, 0.8);
+        --form-text: rgb(233, 233, 47);
+        --form-submit: hsla(130, 25%, 20%, 0.9);
+        --input-background: hsla(55, 31%, 63%, 0.8);
+        --submit-check: hsl(120, 60%, 45%);
+        --submit-delete: hsl(0, 72%, 53%);
+        --submit-cancel: hsl(0, 0%, 50%);
+        --form-placeholder: hsl(66, 50%, 15%);
+    }
+}/**/
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background-color: var(--background);
+}
+
+a {
+    text-decoration: none;
+    color: initial;
+}
+.container {
+    display: grid;
+    grid-auto-flow: row;
+    margin: 10vw auto 50vh auto;
+    width: min-content;
+    gap: 1.5em;
+    transition: all ease-in-out 0.25s;
+}
+
+/* customizable background etc */
+.card {
+    transition: all ease-in-out 0.25s;
+    background-size: cover;
+    background-position: center;
+    width: 196px;
+    height: 128px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.25);
+}
+
+/* style of card */
+.card a {
+    /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), /*inset 0px -32px 16px -4px rgba(0, 0, 0, 0.25)/*, inset 0px 24px 12px -16px rgba(176, 176, 176, 0.25);*/
+    /*background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 0.4) 100%);*/
+    border-radius: 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-url {
+    align-items: flex-end;
+    height: 100%;
+    opacity: 1;
+    transition: all ease-in-out 0.25s;
+}
+
+/* Create Directory Card */
+.card-form {
+    z-index: 200;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    justify-content: space-between;
+    height: 100%;
+    background-size: cover;
+    background-position: left;
+    border-radius: 12px;
+}
+
+.card-add {
+    transition: all 200ms ease-in-out;
+    background-image: none;
+    background-color: var(--add-card);
+    background-position: center;
+}
+
+.card-edit {
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    z-index: 1;
+    animation: fade-in .3s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.card-form > * {
+    margin: 0 1em;
+}
+.card-form > *:first-child {
+    margin: 0.8em 1em 0 1em;
+    color: var(--form-text);
+    text-shadow: auto;
+    text-shadow:
+        0.1em 0 var(--text-shadow),
+        0 0.1em var(--text-shadow),
+        -0.1em 0 var(--text-shadow),
+        0 -0.1em var(--text-shadow);
+}
+.card-form > *:last-child {
+    margin: 0;
+}
+
+.card-form label {
+    cursor: pointer;
+}
+
+.card-form button {
+    border: none;
+    cursor: pointer;
+    background-color: var(--form-submit);
+    transition: 200ms ease-in-out;
+    font-size: initial;
+    width: 100%;
+}
+
+.card-form > .button-row > button:first-child {
+    border-bottom-left-radius: 12px;
+}
+
+.card-form > .button-row > button:last-child {
+    border-bottom-right-radius: 12px;
+}
+
+.check-button {
+    color: var(--submit-check);
+}
+
+.delete-button {
+    color: var(--submit-delete);
+}
+
+.cancel-button {
+    color: var(--submit-cancel);
+}
+
+.check-button:hover {
+    background-color: var(--submit-check);
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: var(--submit-delete);
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: var(--submit-cancel);
+    color: white;
+}
+
+.card:hover .hidden {
+    opacity: 1;
+}
+
+.gone {
+    display: none;
+}
+
+.row {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-between;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    align-items: center;
+}
+
+.row input, .row label {
+    width: 100%;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    padding: 0.5em 0.5em;
+    font-size: x-small;
+    border: none;
+    background-color: var(--input-background);
+    height: fit-content;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all ease-in-out 200ms;
+}
+
+.row input::placeholder, .row label {
+    color: var(--form-placeholder);
+}
+
+.row input:focus {
+    outline: none;
+    background-color: hsla(0, 0%, 85%, 1);
+}
+
+.new-card {
+    animation: fade-in .3s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.card-form > .row > span {
+    font-size: large !important;
+    margin-left: 0.1em; 
+    color: var(--form-text);
+    text-shadow:
+        0.1em 0 var(--text-shadow),
+        0 0.1em var(--text-shadow),
+        -0.1em 0 var(--text-shadow),
+        0 -0.1em var(--text-shadow);
+}
+
+.edit-button:not(:first-child), .card-url:not(:nth-child(2)) {
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* Clickable links */
+.card-url > p {
+    padding: 0.5em 1em;
+    text-align: left;
+    margin: 0;
+    text-decoration: none;
+    overflow: hidden;
+    color: white;
+    width: -webkit-fill-available;
+    border-radius: 0 0 12px 12px;
+    font-weight: 600;
+    font-size: smaller;
+    background-color: hsla(128, 0%, 10%, 0.4);
+    transition: all ease-in-out 200ms;
+    position: relative;
+    word-break: break-word;
+}
+.card-url > p > span {
+    position: absolute;
+    width: inherit;
+    font-weight: normal;
+    opacity: 0;
+    animation: fade-in 250ms ease-out;
+    display: none;
+    padding-right: 0.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+p:hover {
+    padding-bottom: 1.8em;
+    background-color: hsla(128, 0%, 10%, 0.7);
+}
+p:hover > span {
+    opacity: 1;
+    display: block;
+}
+
+
+.edit-button {
+    background: #F2F2F2;
+    color: #333333;
+    border-radius: 4px;
+    margin: 0.8em;
+    margin-left: 10em;
+    opacity: 0;
+    border: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: ease 200ms;
+    cursor: pointer;
+    aspect-ratio: 1 / 1;
+    position: absolute;
+    font-size: medium !important;
+    padding: 4px;
+    z-index: 2;
+}
+
+.edit-button:hover {
+    color: #000;
+    background: lightblue; /*temp*/
+}
+
+/* Media Queries */
+@media(max-width: 621px) {
+    .container {
+        gap: 1em;
+    }
+
+    .card {
+        width: 128px;
+        height: 96px;
+        font-size: 0.75em;
+    }
+    .edit-button {
+        margin: 0.6em;
+        margin-left: 5.8em;
+    }
+
+    .row input, .row label {
+        width: 100%;
+        margin-right: 0.25em;
+        margin-left: 0.25em;
+        padding: 0.25em 0.5em;
+    }
+
+    .card-form > .row > span {
+        font-size: small !important;
+    }
+}
+@media(min-width: 340px) {
+    .container{
+        grid-template-columns: repeat(2, auto);
+    }
+}/**/
+@media(min-width: 500px) {
+    .container{
+        grid-template-columns: repeat(3, auto);
+    }
+}/**/
+@media(min-width: 621px) {
+    .container{
+        grid-template-columns: repeat(2, auto);
+    }
+}/**/
+@media(min-width: 731px) {
+    .container{
+        grid-template-columns: repeat(3, auto);
+    }
+}
+@media(min-width: 951px) {
+    .container{
+        grid-template-columns: repeat(4, auto);
+    }
+}
+@media(min-width: 1165px) {
+    .container{
+        grid-template-columns: repeat(5, auto);
+    }
+}
+
+/* Animations */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
