@@ -29,3 +29,9 @@ read  -n 1 -p "Input Selection:" mainmenuinput
 
 
 # help, need stable way to auto push to gh-pages
+
+#git init
+#git status
+#git add .
+#git commit -m "message"
+#git push --set-upstream origin main
