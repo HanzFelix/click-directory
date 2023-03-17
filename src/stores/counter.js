@@ -98,6 +98,28 @@ export const useCounterStore = defineStore("counter", {
         url: "",
         image: "none",
       };
+    },
+    loadJsonBackup(file) {
+      let x = JSON.parse(file);
+      if (!x[0].title && !x[0].url) {
+        alert("invalid file");
+        return false;
+      }
+      localStorage.setItem('directories', file);
+      this.directories = x;
+      return true
+    },
+    saveToJsonFile()
+    {
+         let dataStr = JSON.stringify(this.directories);
+         let dataUri = "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
+    
+         let fileName = "click_directory_backup_" + new Date().toJSON() + ".json";
+    
+         let linkElement = document.createElement('a');
+         linkElement.setAttribute('href', dataUri);
+         linkElement.setAttribute('download', fileName);
+         linkElement.click();
     }
   },
 });
