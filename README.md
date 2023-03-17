@@ -6,11 +6,11 @@ Customizable landing page to easily access links and sites of the user. It uses 
 
 - [x] Manage the URLs and pages easily.
 - [x] Compatible in all screen sizes.
+- [x] Back up and restore directories to and from a JSON backup file.
 - [ ] Customizable theme provided by the user, for both dark mode and light mode.
-- [ ] Back up preferences in a JSON file for future use.
 - [ ] Rearrange the links with drag and drop.
 - [ ] Revert changes made within the session.
-- [ ] Comfortable UX design in touch screen devices.
+- [ ] Compatible for both mobile and desktop devices.
 
 # Installation
 
