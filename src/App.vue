@@ -47,11 +47,11 @@ function loadJsonFile(e) {
     <!--CardItem><AddCard /></CardItem>
     <CardItem><EditCard /></CardItem-->
   </main>
-  <footer class="w-full bg-slate-600 p-4 flex fixed bottom-0 justify-between">
+  <footer class="w-full bg-slate-600 dark:bg-slate-700 dark:border-t border-slate-600 p-4 flex fixed bottom-0 justify-between">
     <section class="">
       <button
         @click="showAddModal(true)"
-        class="-translate-y-10 shadow-slate-500 bg-slate-200 text-slate-700 items-center gap-1 flex absolute p-4 ml-4 shadow-sm rounded-xl hover:bg-slate-50 transition-colors"
+        class="-translate-y-10 shadow-slate-500 dark:shadow-slate-900 dark:bg-slate-300 bg-slate-200 text-slate-700 items-center gap-1 flex absolute p-4 ml-4 shadow-sm rounded-xl hover:bg-slate-50 transition-colors"
       >
         <span class="material-icons">add</span>
         <span class="inline-block">Add</span>

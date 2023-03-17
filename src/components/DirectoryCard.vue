@@ -35,7 +35,7 @@ function showEditOverlay(bool) {
     :style="{ 'background-image': 'url(' + directory.image + ')' }"
   >
     <a
-      href="https://google.com/"
+      :href="directory.url"
       class="card-url flex flex-col justify-between h-full"
       draggable="false"
     >
