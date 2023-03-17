@@ -11,7 +11,8 @@ cd dist
 
 # if you are deploying to a custom domain
 # echo 'www.example.com' > CNAME
-
+git init
+git status
 git checkout gh-pages
 git add -A
 git commit -m 'Deploy page'
@@ -20,7 +21,7 @@ git commit -m 'Deploy page'
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push origin gh-pages
+git push --set-upstream origin gh-pages
 
 cd -
 
