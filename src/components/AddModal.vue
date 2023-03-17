@@ -17,7 +17,6 @@ function loadImageFile(e) {
   reader.readAsDataURL(file);
   reader.onload = (event) => {
     counterStore.tempDirectory.image = event.target.result;
-    console.log("Image loaded");
   };
 }
 </script>
