@@ -50,7 +50,7 @@ function showEditOverlay(bool) {
       <div
         class="bg-slate-900 bg-opacity-40 px-3 py-2 text-white rounded-b-xl group/x transition-all hover:bg-opacity-60"
       >
-        <p class="font-semibold group-hover/z:truncate leading-5">{{ directory.title }}</p>
+        <p class="font-semibold group-hover/x:truncate leading-5">{{ directory.title }}</p>
         <p
           class="max-h-0 text-sm truncate group-hover/x:max-h-min transition-height ease-in-out delay-200"
         >
