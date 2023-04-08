@@ -1,10 +1,10 @@
 import { ref, computed } from "vue";
 import { defineStore, mapActions } from "pinia";
-import defaultBg from '../assets/default_directory_bg.png'
-import defaultBg1 from '../assets/default_bg_1.jpg'
-import defaultBg2 from '../assets/default_bg_2.jpg'
-import defaultBg3 from '../assets/default_bg_3.jpg'
-import defaultBg4 from '../assets/default_bg_4.jpg'
+import defaultBg from '../../public/images/default_directory_bg.png'
+import defaultBg1 from '../../public/images/default_bg_1.jpg'
+import defaultBg2 from '../../public/images/default_bg_2.jpg'
+import defaultBg3 from '../../public/images/default_bg_3.jpg'
+import defaultBg4 from '../../public/images/default_bg_4.jpg'
 
 const defaultDirectory = {
   title: "Example",
