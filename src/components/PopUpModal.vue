@@ -1,5 +1,4 @@
 <script setup>
-import EditCard from "./EditCard.vue";
 import { useCounterStore } from "../stores/counter";
 
 const counterStore = useCounterStore();
@@ -19,7 +18,6 @@ function emitAsClose() {
   <!-- Model Background -->
   <div
     v-if="show"
-    @click.self="emitAsClose"
     class="fixed inset-0 z-50 flex w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black bg-opacity-50 px-8"
   >
     <!-- Modal content -->
