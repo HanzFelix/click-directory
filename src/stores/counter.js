@@ -1,10 +1,16 @@
 import { ref, computed } from "vue";
 import { defineStore, mapActions } from "pinia";
-import defaultBg from '../../public/images/default_directory_bg.png'
-import defaultBg1 from '../../public/images/default_bg_1.jpg'
-import defaultBg2 from '../../public/images/default_bg_2.jpg'
-import defaultBg3 from '../../public/images/default_bg_3.jpg'
-import defaultBg4 from '../../public/images/default_bg_4.jpg'
+/*import defaultBg from '../images/default_directory_bg.png'
+import defaultBg1 from '../images/default_bg_1.jpg'
+import defaultBg2 from '../images/default_bg_2.jpg'
+import defaultBg3 from '../images/default_bg_3.jpg'
+import defaultBg4 from '../images/default_bg_4.jpg'*/
+
+const defaultBg = "./images/default_directory_bg.png";
+const defaultBg1 = "./images/default_bg_1.jpg"
+const defaultBg2 = "./images/default_bg_2.jpg";
+const defaultBg3 = "./images/default_bg_3.jpg"
+const defaultBg4 = "./images/default_bg_4.jpg"
 
 const defaultDirectory = {
   title: "Example",
@@ -22,6 +28,14 @@ const defaultImages = [
   defaultBg3,
   defaultBg4,
 ];
+/*
+const defaultImages = [
+  "../images/default_directory_bg.png",
+  "../images/default_bg_1.jpg",
+  "../images/default_bg_2.jpg",
+  "../images/default_bg_3.jpg",
+  "../images/default_bg_4.jpg"
+]*/
 
 export const useCounterStore = defineStore("counter", {
   state: () => ({
