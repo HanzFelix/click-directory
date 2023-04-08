@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from "vue";
-import EditCard from "./EditCard.vue";
 import { useCounterStore } from "../stores/counter.js";
 
 const counterStore = useCounterStore();

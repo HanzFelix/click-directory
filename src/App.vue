@@ -4,7 +4,6 @@ import DirectoryCard from "./components/DirectoryCard.vue";
 import HelloWorld from "./components/HelloWorld.vue";
 import CardItem from "./components/CardItem.vue";
 import AddModal from "./components/AddModal.vue";
-import EditCard from "./components/EditCard.vue";
 import EditModal from "./components/EditModal.vue";
 import PopUpModal from "./components/PopUpModal.vue";
 import { useCounterStore } from "./stores/counter";
