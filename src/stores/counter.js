@@ -1,17 +1,22 @@
 import { ref, computed } from "vue";
 import { defineStore, mapActions } from "pinia";
+import defaultBg from '../assets/default_directory_bg.png'
 import defaultBg1 from '../assets/default_bg_1.jpg'
-import defaultBg2 from '../assets/default_bg_1.jpg'
-import defaultBg3 from '../assets/default_bg_1.jpg'
-import defaultBg4 from '../assets/default_bg_1.jpg'
+import defaultBg2 from '../assets/default_bg_2.jpg'
+import defaultBg3 from '../assets/default_bg_3.jpg'
+import defaultBg4 from '../assets/default_bg_4.jpg'
 
 const defaultDirectory = {
   title: "Example",
   url: "https://example.com/",
-  image: defaultBg1,
+  image: defaultBg,
 };
 
+// const defaultImages = [defaultBg];
+
+
 const defaultImages = [
+  defaultBg,
   defaultBg1,
   defaultBg2,
   defaultBg3,
@@ -30,6 +35,7 @@ export const useCounterStore = defineStore("counter", {
     directories: localStorage.getItem("directories")
       ? JSON.parse(localStorage.getItem("directories"))
       : [defaultDirectory],
+    title_max_length: 40,
   }),
   getters: {
     defaultDirectory(state) {
@@ -41,7 +47,7 @@ export const useCounterStore = defineStore("counter", {
       if (!this.tempDirectory.title)
         this.tempDirectory.title = this.tempDirectory.url
           .toString()
-          .substring(0, 64);
+          .substring(0, this.title_max_length);
 
       if (this.tempDirectory.image == "none")
         this.tempDirectory.image =
@@ -70,10 +76,10 @@ export const useCounterStore = defineStore("counter", {
       if (!this.tempDirectory.title)
         this.tempDirectory.title = this.tempDirectory.url
           .toString()
-          .substring(0, 64);
+          .substring(0, this.title_max_length);
 
       if (this.tempDirectory.image == "none")
-        this.tempDirectory.image = getRandomArrayElement(defaultImages);
+        this.tempDirectory.image = defaultImages[Math.floor(Math.random() * defaultImages.length)];;
 
       // update directory and reset
       this.directories[this.currentId] = this.tempDirectory;

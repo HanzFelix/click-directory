@@ -41,7 +41,7 @@ function loadImageFile(e) {
         name="title"
         id="edit-title"
         placeholder="Title"
-        maxlength="64"
+        :maxlength="counterStore.title_max_length"
         v-model="counterStore.tempDirectory.title"
       />
     </div>
