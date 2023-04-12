@@ -40,6 +40,23 @@ const defaultImages = [
 export const useCounterStore = defineStore("counter", {
   state: () => ({
     currentId: 0,
+    imageSourceType: [
+      {
+        source: "upload",
+        icon: "add_photo_alternate",
+        placeholder: "Browse from files..."
+      },
+      {
+        source: "url",
+        icon: "satellite",
+        placeholder: "Use image from URL"
+      },
+      {
+        source: "random",
+        icon: "collections",
+        placeholder: "Random pre-made image"
+      },
+    ],
     tempDirectory: {
       title: "",
       url: "",
@@ -69,13 +86,9 @@ export const useCounterStore = defineStore("counter", {
 
       // add directory and reset
       this.directories.push(this.tempDirectory);
-      this.tempDirectory = {
-        title: "",
-        url: "",
-        image: "none",
-      };
-      this.tempImageName = "Browse...";
+      this.resetTempDirectory();
       localStorage.setItem("directories", JSON.stringify(this.directories));
+      return true;
     },
     loadDirectory(id) {
       this.currentId = id;
@@ -97,12 +110,7 @@ export const useCounterStore = defineStore("counter", {
 
       // update directory and reset
       this.directories[this.currentId] = this.tempDirectory;
-      this.tempDirectory = {
-        title: "",
-        url: "",
-        image: "none",
-      };
-      this.tempImageName = "Browse...";
+      this.resetTempDirectory();
       localStorage.setItem("directories", JSON.stringify(this.directories));
 
       return true;
@@ -118,6 +126,10 @@ export const useCounterStore = defineStore("counter", {
         url: "",
         image: "none",
       };
+      this.tempImageName = "Browse...";
+      while (this.imageSourceType[0].source != "upload") {
+        this.toggleImageSource();
+      }
     },
     loadJsonBackup(file) {
       let x = JSON.parse(file);
@@ -140,6 +152,19 @@ export const useCounterStore = defineStore("counter", {
          linkElement.setAttribute('href', dataUri);
          linkElement.setAttribute('download', fileName);
          linkElement.click();
+    },
+    toggleImageSource()
+    {
+      this.imageSourceType.push(this.imageSourceType.shift());
+      if (this.imageSourceType[0].source == "url")
+      {
+        this.tempDirectory.image = ""
+        this.tempImageName = "Browse..."
+      }
+      else
+      {
+        this.tempDirectory.image = "none"
+      }
     }
   },
 });
