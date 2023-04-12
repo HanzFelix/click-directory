@@ -58,5 +58,4 @@ function showEditOverlay(bool) {
       </div>
     </a>
   </div>
-  <!--EditCard v-if="enableEdit" @cancel="showEditOverlay(false)" /-->
 </template>
