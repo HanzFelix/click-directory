@@ -99,7 +99,7 @@ export const useCounterStore = defineStore("counter", {
         image: this.directories[id].image,
       };
       while (this.imageSourceType[0].source != "upload") {
-        this.toggleImageSource();
+        this.toggleImageSource('edit');
       }
     },
     updateDirectory() {
@@ -131,15 +131,16 @@ export const useCounterStore = defineStore("counter", {
       return true;
     },
     resetTempDirectory() {
+      while (this.imageSourceType[0].source != "upload") {
+        this.toggleImageSource('reset');
+      }
+
       this.tempDirectory = {
         title: "",
         url: "",
         image: "none",
       };
-      this.tempImageName = "Browse...";
-      while (this.imageSourceType[0].source != "upload") {
-        this.toggleImageSource();
-      }
+      this.tempImageName = "Browse..."; // seems redundant for toggleImageSource()
     },
     loadJsonBackup(file) {
       let x = JSON.parse(file);
