@@ -7,10 +7,10 @@ import defaultBg3 from '../images/default_bg_3.jpg'
 import defaultBg4 from '../images/default_bg_4.jpg'*/
 
 const defaultBg = "./images/default_directory_bg.png";
-const defaultBg1 = "./images/default_bg_1.jpg"
+const defaultBg1 = "./images/default_bg_1.jpg";
 const defaultBg2 = "./images/default_bg_2.jpg";
-const defaultBg3 = "./images/default_bg_3.jpg"
-const defaultBg4 = "./images/default_bg_4.jpg"
+const defaultBg3 = "./images/default_bg_3.jpg";
+const defaultBg4 = "./images/default_bg_4.jpg";
 
 const defaultDirectory = {
   title: "Example",
@@ -19,7 +19,6 @@ const defaultDirectory = {
 };
 
 // const defaultImages = [defaultBg];
-
 
 const defaultImages = [
   defaultBg,
@@ -44,17 +43,17 @@ export const useCounterStore = defineStore("counter", {
       {
         source: "upload",
         icon: "add_photo_alternate",
-        placeholder: "Browse from files..."
+        placeholder: "Browse from files...",
       },
       {
         source: "url",
         icon: "satellite",
-        placeholder: "Use image from URL"
+        placeholder: "Use image from URL",
       },
       {
         source: "random",
         icon: "collections",
-        placeholder: "Random pre-made image"
+        placeholder: "Randomize image selection",
       },
     ],
     tempDirectory: {
@@ -97,6 +96,9 @@ export const useCounterStore = defineStore("counter", {
         url: this.directories[id].url,
         image: this.directories[id].image,
       };
+      while (this.imageSourceType[0].source != "upload") {
+        this.toggleImageSource();
+      }
     },
     updateDirectory() {
       // self-correcting
@@ -105,8 +107,9 @@ export const useCounterStore = defineStore("counter", {
           .toString()
           .substring(0, this.title_max_length);
 
-      if (this.tempDirectory.image == "none")
-        this.tempDirectory.image = defaultImages[Math.floor(Math.random() * defaultImages.length)];;
+      if (this.tempDirectory.image == "none" || this.imageSourceType[0].source == "random")
+        this.tempDirectory.image =
+          defaultImages[Math.floor(Math.random() * defaultImages.length)];
 
       // update directory and reset
       this.directories[this.currentId] = this.tempDirectory;
@@ -137,35 +140,32 @@ export const useCounterStore = defineStore("counter", {
         alert("invalid file");
         return false;
       }
-      localStorage.setItem('directories', file);
+      localStorage.setItem("directories", file);
       this.directories = x;
-      return true
+      return true;
     },
-    saveToJsonFile()
-    {
-         let dataStr = JSON.stringify(this.directories);
-         let dataUri = "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
-    
-         let fileName = "click_directory_backup_" + new Date().toJSON() + ".json";
-    
-         let linkElement = document.createElement('a');
-         linkElement.setAttribute('href', dataUri);
-         linkElement.setAttribute('download', fileName);
-         linkElement.click();
+    saveToJsonFile() {
+      let dataStr = JSON.stringify(this.directories);
+      let dataUri =
+        "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
+
+      let fileName = "click_directory_backup_" + new Date().toJSON() + ".json";
+
+      let linkElement = document.createElement("a");
+      linkElement.setAttribute("href", dataUri);
+      linkElement.setAttribute("download", fileName);
+      linkElement.click();
     },
-    toggleImageSource()
-    {
+    toggleImageSource(type) {
       this.imageSourceType.push(this.imageSourceType.shift());
-      if (this.imageSourceType[0].source == "url")
-      {
-        this.tempDirectory.image = ""
-        this.tempImageName = "Browse..."
+      if (type == "edit") return;
+      if (this.imageSourceType[0].source == "url") {
+        this.tempDirectory.image = "";
+        this.tempImageName = "Browse...";
+      } else {
+        this.tempDirectory.image = "none";
       }
-      else
-      {
-        this.tempDirectory.image = "none"
-      }
-    }
+    },
   },
 });
 
