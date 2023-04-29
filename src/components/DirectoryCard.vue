@@ -30,7 +30,7 @@ function showEditOverlay(bool) {
 </script>
 <template>
   <div
-    class="transition-all group/z bg-cover bg-center rounded-xl h-full w-full"
+    class="transition-all group/z bg-cover bg-center rounded-xl h-full w-full bg-slate-300"
     :style="{ 'background-image': 'url(' + directory.image + ')' }"
   >
     <a
