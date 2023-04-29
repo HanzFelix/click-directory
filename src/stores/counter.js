@@ -74,6 +74,8 @@ export const useCounterStore = defineStore("counter", {
   },
   actions: {
     createDirectory() {
+      if (!this.tempDirectory.url) return false;
+
       if (!this.tempDirectory.title)
         this.tempDirectory.title = this.tempDirectory.url
           .toString()
@@ -102,12 +104,17 @@ export const useCounterStore = defineStore("counter", {
     },
     updateDirectory() {
       // self-correcting
+      if (!this.tempDirectory.url) return false;
+
       if (!this.tempDirectory.title)
         this.tempDirectory.title = this.tempDirectory.url
           .toString()
           .substring(0, this.title_max_length);
 
-      if (this.tempDirectory.image == "none" || this.imageSourceType[0].source == "random")
+      if (
+        this.tempDirectory.image == "none" ||
+        this.imageSourceType[0].source == "random"
+      )
         this.tempDirectory.image =
           defaultImages[Math.floor(Math.random() * defaultImages.length)];
 
