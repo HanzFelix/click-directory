@@ -85,7 +85,7 @@ function loadImageFile(e) {
         accept="image/*"
         @change="loadImageFile($event)"
       />
-      <button type="button" class="material-icons text-slate-500 text-2xl bg-white px-2" @click="counterStore.toggleImageSource()"> flip_camera_android </button>
+      <button type="button" class="material-icons text-slate-500 text-2xl bg-white px-2" @click="counterStore.toggleImageSource('add')"> flip_camera_android </button>
     </div>
     <footer class="flex box-border h-8 gap-1.5 material-icons">
       <button

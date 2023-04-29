@@ -56,15 +56,32 @@ function loadImageFile(e) {
         v-model="counterStore.tempDirectory.url"
       />
     </div>
-    <div class="flex box-border gap-1.5 mx-4">
-      <span class="material-icons text-slate-500 text-3xl"> wallpaper </span>
+    <div class="flex box-border mx-4">
+      <span class="material-icons text-slate-500 text-3xl mr-1.5"> {{ counterStore.imageSourceType[0].icon }} </span>
       <label
+        v-show="counterStore.imageSourceType[0].source == 'upload'"
         class="bg-white w-full truncate py-1 px-2"
         for="edit-image"
         id="label-image"
       >
         {{ counterStore.tempImageName }}
       </label>
+      <label
+        v-show="counterStore.imageSourceType[0].source == 'random'"
+        class="bg-white w-full truncate py-1 px-2"
+        id="label-image"
+      >
+        {{ counterStore.imageSourceType[0].placeholder }}
+      </label>
+      <input
+        v-show="counterStore.imageSourceType[0].source == 'url'"
+        v-model="counterStore.tempDirectory.image"
+        class="w-full py-1 px-2"
+        type="url"
+        name="url"
+        id="edit-url"
+        :placeholder="counterStore.imageSourceType[0].placeholder"
+      />
       <input
         type="file"
         name="image"
@@ -73,6 +90,7 @@ function loadImageFile(e) {
         accept="image/*"
         @change="loadImageFile($event)"
       />
+      <button type="button" class="material-icons text-slate-500 text-2xl bg-white px-2" @click="counterStore.toggleImageSource('edit')"> flip_camera_android </button>
     </div>
     <footer class="flex box-border h-8 material-icons">
       <button
