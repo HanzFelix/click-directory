@@ -130,6 +130,7 @@ export const useCounterStore = defineStore("counter", {
       localStorage.setItem("directories", JSON.stringify(this.directories));
       return true;
     },
+    // resets the directory
     resetTempDirectory() {
       while (this.imageSourceType[0].source != "upload") {
         this.toggleImageSource('reset');
