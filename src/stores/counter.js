@@ -99,7 +99,7 @@ export const useCounterStore = defineStore("counter", {
         image: this.directories[id].image,
       };
       while (this.imageSourceType[0].source != "upload") {
-        this.toggleImageSource('edit');
+        this.toggleImageSource("edit");
       }
     },
     updateDirectory() {
@@ -133,7 +133,7 @@ export const useCounterStore = defineStore("counter", {
     // resets the directory
     resetTempDirectory() {
       while (this.imageSourceType[0].source != "upload") {
-        this.toggleImageSource('reset');
+        this.toggleImageSource("reset");
       }
 
       this.tempDirectory = {
@@ -172,7 +172,7 @@ export const useCounterStore = defineStore("counter", {
         this.tempDirectory.image = "";
         this.tempImageName = "Browse...";
       } else {
-        this.tempDirectory.image = "none";
+        //this.tempDirectory.image = "none";
       }
     },
   },
