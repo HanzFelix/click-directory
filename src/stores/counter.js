@@ -66,6 +66,7 @@ export const useCounterStore = defineStore("counter", {
       ? JSON.parse(localStorage.getItem("directories"))
       : [defaultDirectory],
     title_max_length: 40,
+    prevent_edit: true,
   }),
   getters: {
     defaultDirectory(state) {
