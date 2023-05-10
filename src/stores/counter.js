@@ -176,6 +176,16 @@ export const useCounterStore = defineStore("counter", {
         //this.tempDirectory.image = "none";
       }
     },
+    repositionDirectory(fromIndex, toIndex) {
+      if(toIndex < 0 || toIndex > this.directories.length) return;
+      
+      var element = this.directories[fromIndex];
+      this.directories.splice(fromIndex, 1);
+      this.directories.splice(toIndex, 0, element);
+      
+      localStorage.setItem("directories", JSON.stringify(this.directories));
+  }
+  
   },
 });
 
