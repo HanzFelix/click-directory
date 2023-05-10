@@ -31,7 +31,7 @@ function loadJsonFile(e) {
 }
 </script>
 <template>
-  <div class="flex-row-reverse flex gap-4 p-8">
+  <div class="flex-row-reverse flex gap-4 p-8  min-h-[20vw] md:min-h-[10vw] items-start">
     <label class="relative inline-flex items-center peer/a group cursor-pointer">
       <input type="checkbox" value="" class="sr-only peer group" v-model="counterStore.prevent_edit" />
       <div
@@ -45,7 +45,7 @@ function loadJsonFile(e) {
     >
   </div>
   <main
-    class="container mx-auto md:px-16 my-[20vw] md:my-[10vw] px-8 grid gap-6 grid-cols-2 grid-flow-row-dense md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+    class="container mx-auto md:px-16 mb-[20vw] md:mb-[10vw] px-8 grid gap-6 grid-cols-2 grid-flow-row-dense md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
     id="grid"
   >
     <!--Sample card-->
