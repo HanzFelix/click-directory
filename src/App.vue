@@ -31,8 +31,21 @@ function loadJsonFile(e) {
 }
 </script>
 <template>
+  <div class="flex-row-reverse flex gap-4 p-8  min-h-[20vw] md:min-h-[10vw] items-start">
+    <label class="relative inline-flex items-center peer/a group cursor-pointer">
+      <input type="checkbox" value="" class="sr-only peer group" v-model="counterStore.prevent_edit" />
+      <div
+        class="w-12 h-6 bg-slate-400 rounded-full peer peer-focus:after:bg-slate-200 peer-checked:hover:after:text-slate-600 peer-focus:after:text-slate-600 peer-checked:bg-slate-800 peer-checked:after:hover:bg-slate-200 peer-checked:after:translate-x-full  after:content-['drive\_file\_rename\_outline'] peer-checked:after:content-['lock'] after:absolute after:-top-1 after:-left-2 peer-checked:after:bg-slate-600 after:bg-slate-200 peer-checked:after:text-slate-300 after:text-slate-600 after:text-center after:pt-0.5 after:border-transparent after:border-2 after:rounded-full after:h-8 after:w-8 after:transition-all peer-checked:hover:bg-slate-600 material-icons transition-colors"
+      ></div>
+    </label>
+    <span
+      class="ml-3 text-sm font-medium peer/a peer-hover/a:text-slate-300 "
+      :class="counterStore.prevent_edit ? 'text-slate-800':'text-slate-300'"
+      >Edit Mode</span
+    >
+  </div>
   <main
-    class="container mx-auto md:px-16 my-[20vw] md:my-[10vw] px-8 grid gap-6 grid-cols-2 grid-flow-row-dense md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+    class="container mx-auto md:px-16 mb-[20vw] md:mb-[10vw] px-8 grid gap-6 grid-cols-2 grid-flow-row-dense md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
     id="grid"
   >
     <!--Sample card-->
@@ -46,7 +59,9 @@ function loadJsonFile(e) {
     <!--CardItem><AddCard /></CardItem>
     <CardItem><EditCard /></CardItem-->
   </main>
-  <footer class="w-full bg-slate-600 dark:bg-slate-700 dark:border-t border-slate-600 p-4 flex fixed bottom-0 justify-between">
+  <footer
+    class="w-full bg-slate-600 dark:bg-slate-700 dark:border-t border-slate-600 p-4 flex fixed bottom-0 justify-between"
+  >
     <section class="">
       <button
         @click="showAddModal(true)"

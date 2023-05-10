@@ -66,6 +66,7 @@ export const useCounterStore = defineStore("counter", {
       ? JSON.parse(localStorage.getItem("directories"))
       : [defaultDirectory],
     title_max_length: 40,
+    prevent_edit: true,
   }),
   getters: {
     defaultDirectory(state) {
@@ -99,7 +100,7 @@ export const useCounterStore = defineStore("counter", {
         image: this.directories[id].image,
       };
       while (this.imageSourceType[0].source != "upload") {
-        this.toggleImageSource();
+        this.toggleImageSource("edit");
       }
     },
     updateDirectory() {
@@ -130,16 +131,18 @@ export const useCounterStore = defineStore("counter", {
       localStorage.setItem("directories", JSON.stringify(this.directories));
       return true;
     },
+    // resets the directory
     resetTempDirectory() {
+      while (this.imageSourceType[0].source != "upload") {
+        this.toggleImageSource("reset");
+      }
+
       this.tempDirectory = {
         title: "",
         url: "",
         image: "none",
       };
-      this.tempImageName = "Browse...";
-      while (this.imageSourceType[0].source != "upload") {
-        this.toggleImageSource();
-      }
+      this.tempImageName = "Browse..."; // seems redundant for toggleImageSource()
     },
     loadJsonBackup(file) {
       let x = JSON.parse(file);
@@ -170,9 +173,19 @@ export const useCounterStore = defineStore("counter", {
         this.tempDirectory.image = "";
         this.tempImageName = "Browse...";
       } else {
-        this.tempDirectory.image = "none";
+        //this.tempDirectory.image = "none";
       }
     },
+    repositionDirectory(fromIndex, toIndex) {
+      if(toIndex < 0 || toIndex > this.directories.length) return;
+      
+      var element = this.directories[fromIndex];
+      this.directories.splice(fromIndex, 1);
+      this.directories.splice(toIndex, 0, element);
+      
+      localStorage.setItem("directories", JSON.stringify(this.directories));
+  }
+  
   },
 });
 
