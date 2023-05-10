@@ -63,10 +63,10 @@ function repositionDirectory(distance)
           {{ directory.url }}
         </p>
       </div>
-      <div v-if="!counterStore.prevent_edit" class="material-icons flex text-slate-100 ">
-        <button @click.self.prevent="repositionDirectory(-1)" class="w-full py-4 bg-slate-900 bg-opacity-40 hover:bg-opacity-60">chevron_left</button> 
-        <button @click.self.prevent="showEditOverlay(true)" class="w-full py-4 bg-slate-900 bg-opacity-40 hover:bg-opacity-60">drive_file_rename_outline</button> 
-        <button @click.self.prevent="repositionDirectory(1)" class="w-full py-4 bg-slate-900 bg-opacity-40 hover:bg-opacity-60">chevron_right</button>
+      <div v-if="!counterStore.prevent_edit" class="material-icons flex text-slate-100 border-t-[3px] border-slate-400 border-opacity-60">
+        <button @click.self.prevent="repositionDirectory(-1)" class="w-full py-2 bg-slate-900 bg-opacity-50 hover:bg-opacity-70">chevron_left</button> 
+        <button @click.self.prevent="showEditOverlay(true)" class="w-full py-2 bg-slate-900 bg-opacity-50 hover:bg-opacity-70">drive_file_rename_outline</button> 
+        <button @click.self.prevent="repositionDirectory(1)" class="w-full py-2 bg-slate-900 bg-opacity-50 hover:bg-opacity-70">chevron_right</button>
       </div>
     </a>
   </div>
