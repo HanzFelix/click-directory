@@ -29,7 +29,7 @@ function emitAsClose() {
     >
       <!-- Modal header -->
       <header class="flex items-start justify-between rounded-t pt-4 pr-2 pl-4">
-        <h3 class="text-xl text-slate-500 outline-red-500 shadow-sm">
+        <h3 class="text-xl text-slate-100 mix-blend-difference">
           {{ title }}
         </h3>
         <button

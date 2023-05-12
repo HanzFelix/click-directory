@@ -34,7 +34,9 @@ function loadImageFile(e) {
     autocomplete="off"
   >
     <div class="flex box-border gap-1.5 mx-4">
-      <span class="material-icons text-slate-500 text-3xl"> title </span>
+      <span class="material-icons text-slate-100 mix-blend-difference text-3xl">
+        title
+      </span>
       <input
         class="w-full py-1 px-2"
         type="text"
@@ -46,7 +48,9 @@ function loadImageFile(e) {
       />
     </div>
     <div class="flex box-border gap-1.5 mx-4">
-      <span class="material-icons text-slate-500 text-3xl"> link </span>
+      <span class="material-icons text-slate-100 mix-blend-difference text-3xl">
+        link
+      </span>
       <input
         class="w-full py-1 px-2"
         type="url"
@@ -57,7 +61,11 @@ function loadImageFile(e) {
       />
     </div>
     <div class="flex box-border mx-4">
-      <span class="material-icons text-slate-500 text-3xl mr-1.5"> {{ counterStore.imageSourceType[0].icon }} </span>
+      <span
+        class="material-icons text-slate-100 mix-blend-difference text-3xl mr-1.5"
+      >
+        {{ counterStore.imageSourceType[0].icon }}
+      </span>
       <label
         v-show="counterStore.imageSourceType[0].source == 'upload'"
         class="bg-white w-full truncate py-1 px-2"
@@ -90,7 +98,13 @@ function loadImageFile(e) {
         accept="image/*"
         @change="loadImageFile($event)"
       />
-      <button type="button" class="material-icons text-slate-500 text-2xl bg-white px-2" @click="counterStore.toggleImageSource('edit')"> flip_camera_android </button>
+      <button
+        type="button"
+        class="material-icons text-slate-500 text-2xl bg-white px-2"
+        @click="counterStore.toggleImageSource('edit')"
+      >
+        flip_camera_android
+      </button>
     </div>
     <footer class="flex box-border h-8 material-icons">
       <button
