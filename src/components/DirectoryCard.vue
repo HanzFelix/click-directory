@@ -36,7 +36,7 @@ function repositionDirectory(distance) {
     class="card relative h-32 rounded-xl shadow-md shadow-stone-400 dark:shadow-slate-900"
   >
     <div
-      class="group/z h-full w-full overflow-hidden rounded-xl bg-slate-300 bg-cover bg-center transition-all"
+      class="group/z h-full w-full overflow-hidden rounded-xl bg-slate-500 bg-cover bg-center transition-all dark:bg-slate-300"
       :style="{ 'background-image': 'url(' + directory.image + ')' }"
     >
       <a
