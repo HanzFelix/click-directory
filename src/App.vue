@@ -1,8 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import DirectoryCard from "./components/DirectoryCard.vue";
-import HelloWorld from "./components/HelloWorld.vue";
-import CardItem from "./components/CardItem.vue";
 import AddModal from "./components/AddModal.vue";
 import EditModal from "./components/EditModal.vue";
 import PopUpModal from "./components/PopUpModal.vue";
@@ -57,16 +55,13 @@ function loadJsonFile(e) {
     class="container mx-auto mb-[20vw] grid grid-flow-row-dense grid-cols-2 gap-6 px-8 md:mb-[10vw] md:grid-cols-3 md:px-16 lg:grid-cols-4 xl:grid-cols-5"
     id="grid"
   >
-    <!--Sample card-->
-    <CardItem v-for="(directory, index) in counterStore.directories"
-      ><DirectoryCard
-        :id="index"
-        :directory="directory"
-        @edit="showEditModal(true)"
-        @cancel="showEditModal(false)"
-    /></CardItem>
-    <!--CardItem><AddCard /></CardItem>
-    <CardItem><EditCard /></CardItem-->
+    <DirectoryCard
+      v-for="(directory, index) in counterStore.directories"
+      :id="index"
+      :directory="directory"
+      @edit="showEditModal(true)"
+      @cancel="showEditModal(false)"
+    />
   </main>
   <footer
     class="fixed bottom-0 flex w-full justify-between border-slate-600 bg-slate-600 p-4 dark:border-t dark:bg-slate-700"
