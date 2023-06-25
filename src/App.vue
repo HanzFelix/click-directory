@@ -31,21 +31,30 @@ function loadJsonFile(e) {
 }
 </script>
 <template>
-  <div class="flex-row-reverse flex gap-4 p-8  min-h-[20vw] md:min-h-[10vw] items-start">
-    <label class="relative inline-flex items-center peer/a group cursor-pointer">
-      <input type="checkbox" value="" class="sr-only peer group" v-model="counterStore.prevent_edit" />
+  <div
+    class="flex min-h-[20vw] flex-row-reverse items-start gap-4 p-8 md:min-h-[10vw]"
+  >
+    <label
+      class="peer/a group relative inline-flex cursor-pointer items-center"
+    >
+      <input
+        type="checkbox"
+        value=""
+        class="group peer sr-only"
+        v-model="counterStore.prevent_edit"
+      />
       <div
-        class="w-12 h-6 bg-slate-400 rounded-full peer peer-focus:after:bg-slate-200 peer-checked:hover:after:text-slate-600 peer-focus:after:text-slate-600 peer-checked:bg-slate-800 peer-checked:after:hover:bg-slate-200 peer-checked:after:translate-x-full  after:content-['drive\_file\_rename\_outline'] peer-checked:after:content-['lock'] after:absolute after:-top-1 after:-left-2 peer-checked:after:bg-slate-600 after:bg-slate-200 peer-checked:after:text-slate-300 after:text-slate-600 after:text-center after:pt-0.5 after:border-transparent after:border-2 after:rounded-full after:h-8 after:w-8 after:transition-all peer-checked:hover:bg-slate-600 material-icons transition-colors"
+        class="material-icons peer h-6 w-12 rounded-full bg-slate-400 transition-colors after:absolute after:-top-1 after:-left-2 after:h-8 after:w-8 after:rounded-full after:border-2 after:border-transparent after:bg-slate-200 after:pt-0.5 after:text-center after:text-slate-600 after:transition-all after:content-['drive\_file\_rename\_outline'] peer-checked:bg-slate-800 peer-checked:after:translate-x-full peer-checked:after:bg-slate-600 peer-checked:after:text-slate-300 peer-checked:after:content-['lock'] peer-checked:hover:bg-slate-600 peer-checked:after:hover:bg-slate-200 peer-checked:hover:after:text-slate-600 peer-focus:after:bg-slate-200 peer-focus:after:text-slate-600"
       ></div>
     </label>
     <span
-      class="ml-3 text-sm font-medium peer/a peer-hover/a:text-slate-300 "
-      :class="counterStore.prevent_edit ? 'text-slate-800':'text-slate-300'"
+      class="peer/a ml-3 text-sm font-medium peer-hover/a:text-slate-300"
+      :class="counterStore.prevent_edit ? 'text-slate-800' : 'text-slate-300'"
       >Edit Mode</span
     >
   </div>
   <main
-    class="container mx-auto md:px-16 mb-[20vw] md:mb-[10vw] px-8 grid gap-6 grid-cols-2 grid-flow-row-dense md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+    class="container mx-auto mb-[20vw] grid grid-flow-row-dense grid-cols-2 gap-6 px-8 md:mb-[10vw] md:grid-cols-3 md:px-16 lg:grid-cols-4 xl:grid-cols-5"
     id="grid"
   >
     <!--Sample card-->
@@ -60,18 +69,18 @@ function loadJsonFile(e) {
     <CardItem><EditCard /></CardItem-->
   </main>
   <footer
-    class="w-full bg-slate-600 dark:bg-slate-700 dark:border-t border-slate-600 p-4 flex fixed bottom-0 justify-between"
+    class="fixed bottom-0 flex w-full justify-between border-slate-600 bg-slate-600 p-4 dark:border-t dark:bg-slate-700"
   >
     <section class="">
       <button
         @click="showAddModal(true)"
-        class="-translate-y-10 shadow-slate-500 dark:shadow-slate-900 dark:bg-slate-300 bg-slate-200 text-slate-700 items-center gap-1 flex absolute p-4 ml-4 shadow-sm rounded-xl hover:bg-slate-50 transition-colors"
+        class="absolute ml-4 flex -translate-y-10 items-center gap-1 rounded-xl bg-slate-200 p-4 text-slate-700 shadow-sm shadow-slate-500 transition-colors hover:bg-slate-50 dark:bg-slate-300 dark:shadow-slate-900"
       >
         <span class="material-icons">add</span>
         <span class="inline-block">Add</span>
       </button>
     </section>
-    <section class="gap-4 flex">
+    <section class="flex gap-4">
       <!--button
         class="flex gap-2 hover:text-slate-50 text-slate-300 transition-colors"
         onclick="
@@ -81,14 +90,14 @@ function loadJsonFile(e) {
         <span class="hidden md:inline-block">Reset to default</span>
       </button-->
       <button
-        class="flex gap-2 hover:text-slate-50 text-slate-300 transition-colors"
+        class="flex gap-2 text-slate-300 transition-colors hover:text-slate-50"
         @click="counterStore.saveToJsonFile()"
       >
         <span class="material-icons">backup</span>
         <span class="hidden md:inline-block">Create backup</span>
       </button>
       <label
-        class="flex cursor-pointer gap-2 hover:text-slate-50 text-slate-300 transition-colors"
+        class="flex cursor-pointer gap-2 text-slate-300 transition-colors hover:text-slate-50"
         for="load-json"
       >
         <span class="material-icons"> settings_backup_restore </span>
@@ -102,7 +111,7 @@ function loadJsonFile(e) {
       />
       <a
         href="https://github.com/HanzFelix/click-directory"
-        class="hover:fill-slate-50 fill-slate-300 transition-colors"
+        class="fill-slate-300 transition-colors hover:fill-slate-50"
       >
         <svg
           height="24"

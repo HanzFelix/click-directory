@@ -22,14 +22,14 @@ function loadImageFile(e) {
 </script>
 <template>
   <form
-    class="card-form card-add h-full w-full flex flex-col justify-between md:justify-end pt-2 gap-2 rounded-2xl"
+    class="card-form card-add flex h-full w-full flex-col justify-between gap-2 rounded-2xl pt-2 md:justify-end"
     id="edit-form"
     action="#"
     autocomplete="off"
   >
-    <div class="flex box-border mx-4">
+    <div class="mx-4 box-border flex">
       <span
-        class="material-icons text-slate-100 mix-blend-difference text-3xl mr-1.5"
+        class="material-icons mr-1.5 text-3xl text-slate-100 mix-blend-difference"
       >
         title
       </span>
@@ -43,9 +43,9 @@ function loadImageFile(e) {
         :maxlength="counterStore.title_max_length"
       />
     </div>
-    <div class="flex box-border mx-4">
+    <div class="mx-4 box-border flex">
       <span
-        class="material-icons text-slate-100 mix-blend-difference text-3xl mr-1.5"
+        class="material-icons mr-1.5 text-3xl text-slate-100 mix-blend-difference"
       >
         link
       </span>
@@ -59,15 +59,15 @@ function loadImageFile(e) {
         required
       />
     </div>
-    <div class="flex box-border mx-4">
+    <div class="mx-4 box-border flex">
       <span
-        class="material-icons text-slate-100 mix-blend-difference text-3xl mr-1.5"
+        class="material-icons mr-1.5 text-3xl text-slate-100 mix-blend-difference"
       >
         {{ counterStore.imageSourceType[0].icon }}
       </span>
       <label
         v-show="counterStore.imageSourceType[0].source == 'upload'"
-        class="bg-white w-full truncate py-1 px-2"
+        class="w-full truncate bg-white py-1 px-2"
         for="edit-image"
         id="label-image"
       >
@@ -75,7 +75,7 @@ function loadImageFile(e) {
       </label>
       <label
         v-show="counterStore.imageSourceType[0].source == 'random'"
-        class="bg-white w-full truncate py-1 px-2"
+        class="w-full truncate bg-white py-1 px-2"
         id="label-image"
       >
         {{ counterStore.imageSourceType[0].placeholder }}
@@ -99,15 +99,15 @@ function loadImageFile(e) {
       />
       <button
         type="button"
-        class="material-icons text-slate-500 text-2xl bg-white px-2"
+        class="material-icons bg-white px-2 text-2xl text-slate-500"
         @click="counterStore.toggleImageSource('add')"
       >
         flip_camera_android
       </button>
     </div>
-    <footer class="flex box-border h-8 gap-1.5 material-icons">
+    <footer class="material-icons box-border flex h-8 gap-1.5">
       <button
-        class="w-full bg-slate-600 transition-colors text-green-600 hover:bg-green-600 hover:text-white first:rounded-bl-xl last:rounded-br-xl"
+        class="w-full bg-slate-600 text-green-600 transition-colors first:rounded-bl-xl last:rounded-br-xl hover:bg-green-600 hover:text-white"
         value="update"
         @click.stop.prevent="createDir"
       >
