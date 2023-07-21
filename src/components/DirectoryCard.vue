@@ -33,10 +33,10 @@ function repositionDirectory(distance) {
 </script>
 <template>
   <div
-    class="card relative h-32 rounded-xl shadow-md shadow-stone-400 dark:shadow-slate-900"
+    class="card relative h-32 rounded-xl shadow-md shadow-slate-500 dark:shadow-slate-900"
   >
     <div
-      class="group/z h-full w-full overflow-hidden rounded-xl bg-slate-500 bg-cover bg-center transition-all dark:bg-slate-300"
+      class="group/z h-full w-full overflow-hidden rounded-xl bg-slate-400 bg-cover bg-center transition-all dark:bg-slate-300"
       :style="{ 'background-image': 'url(' + directory.image + ')' }"
     >
       <a
@@ -53,7 +53,7 @@ function repositionDirectory(distance) {
         </button>
       </div-->
         <div
-          class="group/x bg-slate-900 bg-opacity-40 px-3 py-2 text-slate-100 transition-all last:rounded-b-xl"
+          class="group/x bg-slate-900 bg-opacity-40 px-3 py-2 text-slate-100 last:rounded-b-xl"
           :class="counterStore.prevent_edit ? 'hover:bg-opacity-60' : ''"
         >
           <p
