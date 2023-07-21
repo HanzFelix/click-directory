@@ -52,7 +52,7 @@ function loadJsonFile(e) {
     >
   </div>
   <main
-    class="container mx-auto mb-[20vw] grid grid-flow-row-dense grid-cols-2 gap-6 px-8 md:mb-[10vw] md:grid-cols-3 md:px-16 lg:grid-cols-4 xl:grid-cols-5"
+    class="container mx-auto mb-[20vw] grid grid-flow-row-dense grid-cols-2 gap-4 px-4 sm:px-8 md:mb-[10vw] md:grid-cols-3 md:gap-6 md:px-16 lg:grid-cols-4 xl:grid-cols-5"
     id="grid"
   >
     <DirectoryCard
